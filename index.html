@@ -42,6 +42,33 @@
         .path { color: #d9534f; font-weight: 600; background-color: #fdf2f2; padding: 2px 6px; border-radius: 4px; display: inline-block; }
         .highlight-blue { color: #0056b3; font-weight: bold; }
         .highlight-red { color: #a94442; font-weight: bold; }
+
+        @media print {
+            body { background-color: #ffffff; padding: 0; color: #000; }
+            .container { width: 100%; margin: 0; box-shadow: none; padding: 0; }
+            .header { border-bottom: 2px solid #666; }
+            h2, h3 { color: #000; border-color: #000; }
+            code, pre {
+                background-color: #1e1e1e !important;
+                color: #d4d4d4 !important;
+                border: 1px solid #999;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            code .comment { color: #6a9955 !important; }
+            code .variable { color: #9cdcfe !important; }
+            code .keyword { color: #c586c0 !important; }
+            code .string { color: #ce9178 !important; }
+            code .function-name { color: #dcdcaa !important; }
+            code .html-tag { color: #569cd6 !important; }
+            code .html-attr { color: #9cdcfe !important; }
+            code .html-string { color: #ce9178 !important; }
+            .alert { background-color: #f0f0f0 !important; border: 1px solid #999; color: #000 !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+            .section { page-break-inside: avoid; }
+            .path { color: #d9534f !important; background-color: #fdf2f2 !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+        }
     </style>
 </head>
 <body>
@@ -62,7 +89,9 @@
             <div class="alert alert-success">
                 ملاحظة: تحميل الملفات المعدلة <a href="folder.zip" download="folder.zip">folder.zip</a>
             </div>
-            <p>نقل مجلد `uploads` إلى <span class="path">/var/www/uploads</span>، وتطبيق قواعد الإدارة الجديدة الخاصة بمتعلمي إعادة التربية (`FRAIS=1500`) وأبناء العمال (`PAYE=1500`)، وإضافة بيانات المتعلم لوصل الإرفاق.</p>
+            <p>
+                نقل مجلد <span class="path">uploads</span> إلى <span class="path">/var/www/uploads</span> لزيادة الأمان، وتطبيق قواعد الإدارة الجديدة الخاصة بمتعلمي إعادة التربية (المعرفين بـ <span class="highlight-blue">FRAIS=1500</span>) وأبناء العمال (المعرفين بـ <span class="highlight-blue">PAYE=1500</span>)، وإضافة بيانات المتعلم لوصل الإرفاق.
+            </p>
         </div>
 
         <div class="section">
@@ -71,6 +100,7 @@
             <pre><code><span class="shell-command">sudo</span> mv <span class="shell-path">/var/www/html/preinscription/uploads</span> <span class="shell-path">/var/www/uploads</span></code></pre>
             
             <strong class="action-item">2. ضبط الصلاحيات:</strong>
+            <p>تأكد من أن خادم الويب (مثل <span class="highlight-blue">www-data</span>) هو المالك ولديه الصلاحيات للكتابة في هذا المجلد.</p>
             <pre><code><span class="shell-command">sudo</span> chown -R www-data:www-data <span class="shell-path">/var/www/uploads</span>
 <span class="shell-command">sudo</span> chmod -R 775 <span class="shell-path">/var/www/uploads</span></code></pre>
         </div>
@@ -78,8 +108,9 @@
         <div class="section">
             <h2>3. المرحلة الثانية: تعديل الواجهة الخلفية (CodeIgniter)</h2>
             <p><strong class="action-item">الملف المستهدف:</strong> <span class="path">application/controllers/Upload_documents.php</span></p>
+            <p>سنقوم بثلاثة تعديلات جوهرية على هذا الملف:</p>
 
-            <h3>3.1 - تعديل دالة `verify_student()` (لتطبيق القواعد الجديدة)</h3>
+            <h3>3.1 - تعديل دالة <span class="highlight-blue">verify_student()</span> (لتطبيق القواعد الجديدة)</h3>
             <p>هذا هو التعديل الأهم. يجب أن نتحقق من حالة المتعلم ونحفظها في الجلسة.</p>
             <pre><code>
     <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">verify_student</span>()
@@ -111,10 +142,9 @@
                 <span class="variable">$is_returning_student</span> <span class="operator">=</span> (<span class="variable">$student</span><span class="operator">-></span><span class="variable">ANNEEINS</span> <span class="operator">&lt;</span> 2026);
                 <span class="variable">$requires_extra_docs</span> <span class="operator">=</span> <span class="keyword">false</span>;
                 
-                <span class="comment">// الوثائق الإضافية مطلوبة فقط للمتعلمين الجدد (العاديين أو أبناء العمال)</span>
                 <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$is_returning_student</span> <span class="operator">&amp;&amp;</span> (<span class="variable">$is_paid</span> <span class="operator">||</span> <span class="variable">$is_worker_child</span>)) {
                     <span class="variable">$birth_date_obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="function-name">DateTime</span>(<span class="variable">$student</span><span class="operator">-></span><span class="variable">DNS</span>);
-                    <span class="variable">$cutoff_date</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="function-name">DateTime</span>(<span class="string">'1800-01-01'</span>); <span class="comment">// التاريخ المعدل</span>
+                    <span class="variable">$cutoff_date</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="function-name">DateTime</span>(<span class="string">'1800-01-01'</span>);
                     <span class="keyword">if</span> (<span class="variable">$birth_date_obj</span> <span class="operator">&lt;</span> <span class="variable">$cutoff_date</span>) {
                         <span class="variable">$requires_extra_docs</span> <span class="operator">=</span> <span class="keyword">true</span>;
                     }
@@ -123,7 +153,7 @@
                 <span class="variable">$session_data</span> <span class="operator">=</span> [
                     <span class="string">'upload_student_enpr'</span> <span class="operator">=></span> <span class="variable">$student</span><span class="operator">-></span><span class="variable">ENPR</span>,
                     <span class="string">'upload_student_name'</span> <span class="operator">=></span> <span class="variable">$student</span><span class="operator">-></span><span class="variable">NOM</span> <span class="operator">.</span> <span class="string">' '</span> <span class="operator">.</span> <span class="variable">$student</span><span class="operator">-></span><span class="variable">PRENOM</span>,
-                    <span class="string">'upload_student_dns'</span> <span class="operator">=></span> <span class="variable">$student</span><span class="operator">-></span><span class="variable">DNS</span>, <span class="comment">// لإضافته للوصل</span>
+                    <span class="string">'upload_student_dns'</span> <span class="operator">=></span> <span class="variable">$student</span><span class="operator">-></span><span class="variable">DNS</span>,
                     <span class="string">'upload_student_annexe'</span> <span class="operator">=></span> <span class="variable">$student</span><span class="operator">-></span><span class="variable">ANNEXE</span>,
                     <span class="string">'is_returning_student'</span> <span class="operator">=></span> <span class="variable">$is_returning_student</span>,
                     <span class="string">'is_reeducation_student'</span> <span class="operator">=></span> <span class="variable">$is_reeducation</span>,
@@ -137,8 +167,7 @@
     }
             </code></pre>
 
-            <h3>3.2 - تعديل دالة `do_upload()` (لتطبيق القواعد الجديدة)</h3>
-            <p>هنا نقرأ الحالات من الجلسة لنقرر ما هي الملفات الإجبارية وما هو المسار الصحيح.</p>
+            <h3>3.2 - تعديل دالة <span class="highlight-blue">do_upload()</span> (لتطبيق القواعد الجديدة ومسار الرفع)</h3>
             <pre><code>
     <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">do_upload</span>()
     {
@@ -147,7 +176,7 @@
         <span class="variable">$is_reeducation</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-></span><span class="variable">session</span><span class="operator">-></span><span class="function-name">userdata</span>(<span class="string">'is_reeducation_student'</span>);
         <span class="variable">$requires_extra</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-></span><span class="variable">session</span><span class="operator">-></span><span class="function-name">userdata</span>(<span class="string">'requires_extra_docs'</span>);
         
-        <span class="variable">$all_possible_files</span> <span class="operator">=</span> [ <span class="comment">/* ... */</span> ];
+        <span class="comment">// ... (قائمة $all_possible_files) ...</span>
         <span class="variable">$required_inputs</span> <span class="operator">=</span> []; <span class="comment">// قائمة الملفات الإجبارية</span>
 
         <span class="keyword">if</span> (<span class="variable">$is_returning</span>) {
@@ -184,12 +213,11 @@
     }
             </code></pre>
 
-            <h3>3.3 - تعديل دالة `_show_success_page()` (لإضافة بيانات الوصل)</h3>
+            <h3>3.3 - تعديل دالة <span class="highlight-blue">_show_success_page()</span> (لإضافة بيانات الوصل)</h3>
             <pre><code>
     <span class="keyword">private</span> <span class="keyword">function</span> <span class="function-name">_show_success_page</span>(<span class="variable">$uploaded_files</span>)
     {
         <span class="comment">// ... (تجهيز $display_files) ...</span>
-        <span class="variable">$data</span>[<span class="string">'uploaded_files_display'</span>] <span class="operator">=</span> <span class="variable">$display_files</span>;
         
         <span class="comment">// =================================================================</span>
         <span class="comment">// التعديل 3: إضافة بيانات المتعلم للوصل</span>
@@ -209,31 +237,70 @@
             <h3>3.4 - إضافة "البوابة الآمنة" (Gatekeeper)</h3>
             <p>أضف هذه الدالة <span class="highlight-blue">الجديدة</span> إلى ملف <span class="path">application/controllers/Upload_documents.php</span>.</p>
             <pre><code>
+    <span class="comment">/**
+     * دالة جديدة: البوابة الآمنة (Gatekeeper) لعرض الملفات
+     */</span>
     <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">view_file</span>(<span class="variable">$file_name</span> <span class="operator">=</span> <span class="string">''</span>)
     {
-        <span class="comment">// هذا الكود سيعمل فقط إذا لم تُدمر الجلسة بعد</span>
-        <span class="comment">// أو يجب أن يعتمد على نظام مصادقة منفصل.</span>
-        <span class="comment">// للتوافق مع صفحة النجاح، نفترض أن الجلسة ما زالت نشطة</span>
-        
-        <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$this</span><span class="operator">-></span><span class="variable">session</span><span class="operator">-></span><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>)) {
-             <span class="comment">// إذا دُمرت الجلسة، يجب أن نعيد المستخدم لصفحة التحقق</span>
-             <span class="function-name">redirect</span>(<span class="string">'upload_documents'</span>);
-             <span class="keyword">return</span>;
-        }
-        <span class="comment">// ... (باقي كود التحقق من الملف وتقديمه) ...</span>
+        <span class="comment">// ... (كود التحقق من الجلسة ومنع هجمات Directory Traversal) ...</span>
+
+        <span class="comment">// بناء المسار الفعلي (المطلق) للملف</span>
+        <span class="variable">$physical_path</span> <span class="operator">=</span> <span class="string">'/var/www/uploads/'</span> <span class="operator">.</span> <span class="variable">$annexe</span> <span class="operator">.</span> <span class="string">'/'</span> <span class="operator">.</span> <span class="variable">$file_name</span>;
+
+        <span class="comment">// ... (التحقق من وجود الملف وتقديمه للمتصفح) ...</span>
     }
             </code></pre>
         </div>
 
         <div class="section">
             <h2>4. المرحلة الرابعة: تحديث الواجهة الأمامية (Views)</h2>
-            <p>يجب تحديث الواجهات لتعكس الحالات المختلفة (متعلم قديم، إعادة تربية، متعلم جديد).</p>
             
             <p><strong class="action-item">الملف المستهدف:</strong> <span class="path">application/views/preinscription/upload/upload_form_view.php</span></p>
-            <p>يجب أن يحتوي الملف على منطق `if/elseif/else` لعرض الحقول الصحيحة لكل حالة، مع إضافة `required` للملفات الإجبارية فقط.</p>
+            <p>يجب تحديث الواجهة لتعرض الحالات المختلفة (قديم، إعادة تربية، جديد) وتحدد الحقول الإجبارية الصحيحة لكل حالة.</p>
             
-             <p><strong class="action-item">الملف المستهدف:</strong> <span class="path">application/views/preinscription/upload/upload_success_view.php</span></p>
-             <p>يجب تحديث هذا الملف لإضافة بيانات المتعلم (النقطة 2 من طلب الإدارة) وتطبيق "الحل (أ)" أو "الحل (ب)" (من الدليل السابق) لمعالجة مشكلة الروابط القديمة والجديدة.</p>
+            <p><strong class="action-item">الملف المستهدف:</strong> <span class="path">application/views/preinscription/upload/upload_success_view.php</span></p>
+            <p>يجب تحديث هذه الواجهة لإضافة بيانات المتعلم (النقطة 2 من طلب الإدارة) وتطبيق "الحل (أ)" أو "الحل (ب)" لمعالجة مشكلة الروابط القديمة والجديدة.</p>
+        </div>
+
+        <div class="section">
+            <h2>5. المرحلة الخامسة: حل مشكلة التوافق (البيانات القديمة والجديدة)</h2>
+            <div class="alert alert-warning">
+                <strong>مشكلة:</strong> قاعدة البيانات تحتوي حاليًا على روابط كاملة (<span class="highlight-blue">http://...</span>). النظام الجديد يحفظ أسماء ملفات فقط. هذا سيؤدي إلى فشل الروابط القديمة.
+            </div>
+            
+            <h4>الحل (أ): التحديث عبر SQL (موصى به)</h4>
+            <p>هذا الحل ينظف قاعدة البيانات مرة واحدة. قم بتنفيذه على كل قاعدة بيانات <span class="path">preinscriptionXX</span>.</p>
+            <pre><code>
+<span class="comment">-- هذا السكريبت يقوم بقص الرابط الكامل والاحتفاظ باسم الملف فقط</span>
+<span class="keyword">UPDATE</span> student_documents
+<span class="keyword">SET</span> 
+    doc_payment_receipt_url <span class="operator">=</span> <span class="function-name">SUBSTRING_INDEX</span>(doc_payment_receipt_url, <span class="string">'/'</span>, <span class="operator">-</span>1)
+<span class="keyword">WHERE</span> 
+    doc_payment_receipt_url <span class="keyword">LIKE</span> <span class="string">'http%'</span>;
+
+<span class="comment">-- كرر الأمر لباقي الأعمدة</span>
+<span class="keyword">UPDATE</span> student_documents
+<span class="keyword">SET</span> 
+    doc_birth_certificate_url <span class="operator">=</span> <span class="function-name">SUBSTRING_INDEX</span>(doc_birth_certificate_url, <span class="string">'/'</span>, <span class="operator">-</span>1)
+<span class="keyword">WHERE</span> 
+    doc_birth_certificate_url <span class="keyword">LIKE</span> <span class="string">'http%'</span>;
+<span class="comment">-- ... (وهكذا لباقي الأعمدة) ...</span>
+            </code></pre>
+            
+            <h4>الحل (ب): التحديث عبر الكود (أقل كفاءة)</h4>
+            <p>إذا كان لا يمكن تعديل قاعدة البيانات، قم بجعل الواجهة <span class="path">upload_success_view.php</span> ذكية للتعامل مع الحالتين:</p>
+             <pre><code><span class="html-tag">&lt;?php</span>
+    <span class="variable">$url</span> <span class="operator">=</span> <span class="string">''</span>;
+    <span class="keyword">if</span> (<span class="function-name">filter_var</span>(<span class="variable">$filename_or_url</span>, FILTER_VALIDATE_URL)) {
+        <span class="comment">// 1. بيانات قديمة (رابط كامل)، استخدمه كما هو</span>
+        <span class="variable">$url</span> <span class="operator">=</span> <span class="variable">$filename_or_url</span>;
+    } <span class="keyword">else</span> {
+        <span class="comment">// 2. بيانات جديدة (اسم ملف)، استخدم البوابة الآمنة</span>
+        <span class="variable">$url</span> <span class="operator">=</span> <span class="function-name">base_url</span>(<span class="string">'index.php/upload_documents/view_file/'</span> <span class="operator">.</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$filename_or_url</span>));
+    }
+<span class="html-tag">?&gt;</span>
+<span class="html-tag">&lt;a</span> <span class="html-attr">href=</span><span class="html-string">"&lt;?php echo $url; ?&gt;"</span><span class="html-tag">&gt;</span>معاينة<span class="html-tag">&lt;/a&gt;</span>
+            </code></pre>
         </div>
     </div>
 
