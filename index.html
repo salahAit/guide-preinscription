@@ -223,7 +223,7 @@
             <span class="variable">$student</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">M_inscriptic_eleve</span><span class="operator">-&gt;</span><span class="function-name">inseleve_rechercheENBR_DNS</span>(<span class="variable">$param</span>);
 
             <span class="keyword">if</span> (<span class="variable">$student</span>) {
-                <span class="comment">// --- تطبيق القواعد الجديدة للإدارة (تحديث 27/10) ---</span>
+                <span class="comment">// --- تطبيق القواعد الجديدة للإدارة (تحديث 06/11) ---</span>
                 <span class="variable">$is_paid</span> <span class="operator">=</span> (<span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">PAYE</span> <span class="operator">==</span> <span class="variable">1</span>);
                 <span class="variable">$is_worker_child</span> <span class="operator">=</span> (<span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">PAYE</span> <span class="operator">==</span> <span class="variable">1500</span>);
                 <span class="variable">$is_reeducation</span> <span class="operator">=</span> (<span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">FRAIS</span> <span class="operator">==</span> <span class="variable">1500</span>);
