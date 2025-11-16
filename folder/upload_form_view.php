@@ -24,14 +24,14 @@
                         <!-- ======================= -->
                         <!-- الحالة 1: متعلم قديم -->
                         <!-- ======================= -->
-                        <div class="alert alert-info"><strong>ملاحظة:</strong> بما أنك متعلم قديم، يطلب منك فقط إرفاق **وصل الدفع (إجباري)**.</div>
+                        <div class="alert alert-info"><strong>ملاحظة:</strong> بما أنك متعلم قديم، يطلب منك فقط إرفاق <strong>وصل الدفع (إجباري)</strong>.</div>
                         <div class="form-group"><label for="doc_payment">1. وصل الدفع <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_payment" name="doc_payment" class="form-control" accept="application/pdf" required /></div>
 
                     <?php elseif (isset($is_reeducation) && $is_reeducation): ?>
                         <!-- ======================= -->
                         <!-- الحالة 2: إعادة التربية (FRAIS=1500) -->
                         <!-- ======================= -->
-                        <div class="alert alert-warning"><strong>ملاحظة (إعادة التربية):</strong> يطلب منك إرفاق **شهادة الميلاد (إجبارية)**. باقي الوثائق اختيارية.</div>
+                        <div class="alert alert-warning"><strong>ملاحظة (إعادة التربية):</strong> يطلب منك إرفاق <strong>شهادة الميلاد (إجبارية)</strong>. باقي الوثائق اختيارية.</div>
                         <div class="form-group"><label for="doc_payment">1. وصل الدفع (اختياري)</label><input type="file" id="doc_payment" name="doc_payment" class="form-control" accept="application/pdf" /></div>
                         <div class="form-group"><label for="doc_birth">2. شهادة الميلاد <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_birth" name="doc_birth" class="form-control" accept="application/pdf" required /></div>
                         <div class="form-group"><label for="doc_photo">3. الصورة الشمسية (اختياري)</label><input type="file" id="doc_photo" name="doc_photo" class="form-control" accept="application/pdf" /></div>
@@ -43,20 +43,18 @@
                     <!-- ======================= -->
                     <!-- الحالة 3: متعلم جديد (عادي أو ابن عامل) -->
                     <!-- ======================= -->
-                    <?php if (isset($requires_extra_docs) && $requires_extra_docs): ?>
-                        <div class="alert alert-info"><strong>ملاحظة هامة:</strong> يجب إرفاق جميع الوثائق **الستة (6)** المطلوبة لإتمام العملية بنجاح.</div>
-                        <div class="form-group"><label for="doc_payment">1. وصل الدفع <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_payment" name="doc_payment" class="form-control" accept="application/pdf" required /></div>
-                        <div class="form-group"><label for="doc_birth">2. شهادة الميلاد <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_birth" name="doc_birth" class="form-control" accept="application/pdf" required /></div>
-                        <div class="form-group"><label for="doc_photo">3. الصورة الشمسية <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_photo" name="doc_photo" class="form-control" accept="application/pdf" required /></div>
-                        <div class="form-group"><label for="doc_statement">4. التصريح الشرفي <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_statement" name="doc_statement" class="form-control" accept="application/pdf" required /></div>
-                        <div class="form-group"><label for="doc_school">5. شهادة مدرسية أو شهادة التحرر من محو الأمية <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_school" name="doc_school" class="form-control" accept="application/pdf" required /></div>
-                        <div class="form-group"><label for="doc_grades">6. كشف النقاط <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_grades" name="doc_grades" class="form-control" accept="application/pdf" required /></div>
-                    <?php else: ?>
-                        <div class="alert alert-info"><strong>ملاحظة هامة:</strong> يجب إرفاق جميع الوثائق **الأربعة (4)** المطلوبة لإتمام العملية بنجاح.</div>
-                        <div class="form-group"><label for="doc_payment">1. وصل الدفع <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_payment" name="doc_payment" class="form-control" accept="application/pdf" required /></div>
-                        <div class="form-group"><label for="doc_birth">2. شهادة الميلاد <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_birth" name="doc_birth" class="form-control" accept="application/pdf" required /></div>
-                        <div class="form-group"><label for="doc_photo">3. الصورة الشمسية <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_photo" name="doc_photo" class="form-control" accept="application/pdf" required /></div>
-                        <div class="form-group"><label for="doc_statement">4. التصريح الشرفي <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_statement" name="doc_statement" class="form-control" accept="application/pdf" required /></div>
+                    <div class="alert alert-info"><strong>ملاحظة هامة:</strong> الوثائق الأربعة الأولى إجبارية.</div>
+
+                    <div class="form-group"><label for="doc_payment">1. وصل الدفع <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_payment" name="doc_payment" class="form-control" accept="application/pdf" required /></div>
+                    <div class="form-group"><label for="doc_birth">2. شهادة الميلاد <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_birth" name="doc_birth" class="form-control" accept="application/pdf" required /></div>
+                    <div class="form-group"><label for="doc_photo">3. الصورة الشمسية <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_photo" name="doc_photo" class="form-control" accept="application/pdf" required /></div>
+                    <div class="form-group"><label for="doc_statement">4. التصريح الشرفي <span style="color:red;">(إجباري)</span></label><input type="file" id="doc_statement" name="doc_statement" class="form-control" accept="application/pdf" required /></div>
+
+                    <?php if (isset($show_extra_fields) && $show_extra_fields): ?>
+                        <!-- مولود قبل 1997: أظهر الحقول لكنها اختيارية -->
+                        <div class="alert alert-warning"><strong>تنبيه:</strong> بما أن تاريخ ميلادك قبل 01-01-1997 يرجى إرفاق الوثائق التالية (إن وجدت).</div>
+                        <div class="form-group"><label for="doc_school">5. شهادة مدرسية أو شهادة التحرر من محو الأمية (اختياري)</label><input type="file" id="doc_school" name="doc_school" class="form-control" accept="application/pdf" /></div>
+                        <div class="form-group"><label for="doc_grades">6. كشف النقاط (اختياري)</label><input type="file" id="doc_grades" name="doc_grades" class="form-control" accept="application/pdf" /></div>
                     <?php endif; ?>
                 <?php endif; ?>
 

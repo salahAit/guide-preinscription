@@ -8,7 +8,7 @@
             <div class="panel-heading"><h3 class="panel-title">تمت عملية الإرفاق بنجاح</h3></div>
             <div class="panel-body">
                 <div class="alert alert-success text-center" style="font-size: 1.2em;">
-                    <span class="glyphicon glyphicon-ok-circle" style="font-size: 2em; margin-bottom: 15px;"></span><br>
+                    <span class="glyphicon glyphicon-ok-circle" style="font-size: 2em; margin-bottom: 15px;"></span>
                     لقد تم إرفاق وثائقك بنجاح.
                 </div>
                 
@@ -17,7 +17,7 @@
                     <hr>
                     
                     <!-- ================================== -->
-                    <!-- التعديل 2: إضافة بيانات المتعلم -->
+                    <!-- التعديل: إضافة بيانات المتعلم -->
                     <!-- ================================== -->
                     <?php if(isset($student_info)): ?>
                         <div class="well well-sm">
@@ -58,7 +58,7 @@
 function printReceipt() {
     var printContents = document.getElementById('receipt-to-print').innerHTML;
     var originalContents = document.body.innerHTML;
-    document.body.innerHTML = '<html><head><title>طباعة وصل</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" xintegrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><style>body { direction: rtl; }</style></head><body>' + printContents + '</body></html>';
+    document.body.innerHTML = '<html><head><title>طباعة وصل</title><link rel="stylesheet" href="[https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css](https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css)" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><style>body { direction: rtl; }</style></head><body>' + printContents + '</body></html>';
     window.print();
     document.body.innerHTML = originalContents;
     location.reload();

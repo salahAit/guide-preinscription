@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>توجيه تقني: تطبيق قواعد الإدارة (تحديث 27/10)</title>
+    <title>توجيه تقني: تطبيق قواعد الإدارة (16-11-2025)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
@@ -11,14 +11,15 @@
         body { font-family: 'Cairo', sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.8; margin: 0; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); padding: 25px 40px; }
         .header { text-align: center; border-bottom: 2px solid #e0e0e0; padding-bottom: 20px; margin-bottom: 30px; }
-        .header h1 { color: #2c3e50; margin: 0; }
+        .header h1 { color: #2c3e50; margin: 0; font-size: 1.8rem; }
         .header-meta { margin-top: 10px; font-size: 0.9em; color: #7f8c8d; }
         .section { margin-bottom: 35px; border-bottom: 1px dashed #ccc; padding-bottom: 25px; }
         .section:last-child { border-bottom: none; padding-bottom: 0; }
-        h2 { color: #0056b3; border-right: 4px solid #0056b3; padding-right: 10px; margin-bottom: 20px; }
-        h3 { color: #34495e; margin-top: 25px; }
+        h2 { color: #0056b3; border-right: 4px solid #0056b3; padding-right: 10px; margin-bottom: 20px; font-size: 1.6rem; }
+        h3 { color: #34495e; margin-top: 25px; margin-bottom: 15px; font-size: 1.3rem; }
         
-        code, pre { font-family: 'Courier New', Courier, monospace; background-color: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 5px; direction: ltr; text-align: left; border: 1px solid #333; display: block; overflow-x: auto; font-size: 0.9em; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word; }
+        pre { font-family: 'Courier New', Courier, monospace; background-color: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 5px; direction: ltr; text-align: left; border: 1px solid #333; display: block; overflow-x: auto; font-size: 0.9em; line-height: 1.6; white-space: pre; word-wrap: break-word; }
+        code { font-family: 'Courier New', Courier, monospace; }
         code .comment { color: #6a9955; font-style: italic; }
         code .variable { color: #9cdcfe; }
         code .keyword { color: #c586c0; font-weight: bold; }
@@ -28,14 +29,17 @@
         code .html-tag { color: #569cd6; }
         code .html-attr { color: #9cdcfe; }
         code .html-string { color: #ce9178; }
-        code .php-tag { color: #808080; }
-        
+        code .php-tag { color: #f6ad55; font-weight: bold; }
+
         .action-item { font-weight: bold; color: #7f8c8d; display: block; margin-bottom: 10px; }
         .alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; }
         .alert-info { background-color: #d9edf7; color: #31708f; border-color: #bce8f1; }
-        .alert-success { background-color: #dff0d8; color: #3c763d; border-color: #d6e9c6; }
-        .path { color: #d9534f; font-weight: 600; background-color: #fdf2f2; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+                .alert-success { background-color: #dff0d8; color: #3c763d; border-color: #d6e9c6; }
+
+        .path { color: #d9534f; font-weight: 600; background-color: #fdf2f2; padding: 2px 6px; border-radius: 4px; display: inline-block; direction: ltr;}
         .highlight-blue { color: #0056b3; font-weight: bold; }
+        ul { list-style-type: disc; padding-right: 2rem; }
+        li { margin-bottom: 0.5rem; }
 
         @media print {
             body { background-color: #ffffff; padding: 0; color: #000; }
@@ -70,490 +74,531 @@
     <div class="container">
 
         <div class="header">
-            <h1>توجيه تقني: تطبيق قواعد الإدارة (تحديث 06-11-2025)</h1>
+            <h1>توجيه تقني: تطبيق قواعد الإدارة (تحديث 16-11-2025)</h1>
             <div class="header-meta">
-                إعداد: أيت أمقران صالح 
+                إعداد: أيت أمقران صالح
                 <span style="margin: 0 10px;">|</span>
-                تاريخ: 06-11-2025
+                تاريخ: 16-11-2025
             </div>
         </div>
-        
+            
         <div class="alert alert-success">
             ملاحظة: تحميل الملفات المعدلة <a href="folder.zip" download="folder.zip">folder.zip</a>
         </div>
 
+
         <div class="section">
-            <h2>فهرس المحتويات</h2>
-            <ol>
-                <li><a href="#section-1">الهدف</a></li>
-                <li><a href="#section-2">المرحلة الأولى: تعديل وحدة التحكم</a>
-                    <ul>
-                        <li><a href="#section-2-1">2.1 الملف: application/controllers/Upload_documents.php</a></li>
-                    </ul>
-                </li>
-                <li><a href="#section-3">المرحلة الثانية: تعديل واجهات العرض</a>
-                    <ul>
-                        <li><a href="#section-3-1">3.1 الملف: application/views/preinscription/upload/upload_form_view.php</a></li>
-                        <li><a href="#section-3-2">3.2 الملف: application/views/preinscription/upload/upload_success_view.php</a></li>
-                    </ul>
-                </li>
-            </ol>
-        </div>
-
-
-        <div class="section" id="section-1">
             <h2>1. الهدف</h2>
             <p>
-                تطبيق قواعد الإدارة الجديدة على ميزة "إرفاق الوثائق". يشمل هذا التحديث ما يلي:
+                تطبيق قواعد الإدارة الجديدة على ميزة "إرفاق الوثائق". هذا الدليل يشرح كل التعديلات المطلوبة لـ:
             </p>
             <ul>
-                <li>السماح بالدخول للمتعلمين من فئة "إعادة التربية" (<span class="highlight-blue">FRAIS=1500</span>) و "أبناء العمال" (<span class="highlight-blue">PAYE=1500</span>) حتى لو لم يدفعوا الحقوق.</li>
-                <li>تعديل الوثائق الإجبارية:
-                    <ul>
-                        <li>إعادة التربية: شهادة الميلاد فقط إجبارية.</li>
-                        <li>أبناء العمال: نفس وثائق المتعلم الجديد العادي.</li>
+                <li><strong>تحديث شروط الدخول:</strong> السماح للمتعلمين من فئة "إعادة التربية" (المعرفين بـ <code class="path" style="font-size: 0.9em; color: #c0392b;">FRAISINS=1500</code>) و "أبناء العمال" (المعرفين بـ <code class="path" style="font-size: 0.9em; color: #c0392b;">PAYE=5</code>) بإرفاق الوثائق حتى لو لم يدفعوا الحقوق (<code class="path" style="font-size: 0.9em; color: #c0392b;">PAYE != 1</code>).</li>
+                <li><strong>تطبيق منطق الوثائق الديناميكي للمتعلمين الجدد:</strong>
+                    <ul style="padding-right: 1.5rem; margin-top: 0.5rem;">
+                        <li>المولودون قبل 1997: إظهار 6 حقول (4 إجبارية، 2 اختيارية).</li>
+                        <li>المولودون بعد 1997: إظهار 4 حقول إجبارية فقط.</li>
                     </ul>
                 </li>
-                <li>إضافة بيانات المتعلم (رقم الاستمارة، الاسم، تاريخ الميلاد) إلى وصل الإرفاق.</li>
+                <li><strong>تعديل حالة "إعادة التربية":</strong> إظهار 6 حقول، مع جعل "شهادة الميلاد" فقط إجبارية.</li>
+                <li><strong>تحديث وصل الإرفاق:</strong> إضافة بيانات المتعلم (الاسم، رقم الاستمارة، تاريخ الميلاد) إلى الوصل.</li>
             </ul>
-            <div class="alert alert-info">
-                <strong>ملاحظة هامة:</strong> هذا التحديث لا يغير مسار مجلد <span class="highlight-blue">uploads</span> الحالي. سيبقى النظام يعمل على المسار <span class="path">./uploads/</span>.
-                <br>
-                <strong>مسار الملفات:</strong> <span class="path">/var/www/html/preinscription/uploads/</span>
-            </div>
         </div>
 
-        <div class="section" id="section-2">
-            <h2>2. المرحلة الأولى: تعديل وحدة التحكم</h2>
-            
-            <h3 id="section-2-1">2.1 الملف: <span class="path">application/controllers/Upload_documents.php</span></h3>
-            <p><strong class="action-item">الإجراء:</strong> قم باستبدال الكود الكامل لوحدة التحكم بهذا الكود المحدث. التغييرات الرئيسية موجودة في دوال <span class="highlight-blue">verify_student</span>, <span class="highlight-blue">do_upload</span>, و <span class="highlight-blue">_show_success_page</span>.</p>
-            
-            <pre><code><span class="php-tag">&lt;?php</span>
-<span class="function-name">defined</span>(<span class="string">'BASEPATH'</span>) <span class="keyword">or</span> <span class="function-name">exit</span>(<span class="string">'No direct script access allowed'</span>);
+        <div class="section">
+            <h2>2. المرحلة الأولى: تعديل الواجهة الخلفية (Backend)</h2>
+            <p><strong class="action-item">الملف المستهدف:</strong> <span class="path">application/controllers/Upload_documents.php</span></p>
 
-<span class="keyword">class</span> <span class="variable">Upload_documents</span> <span class="keyword">extends</span> <span class="variable">Controller_Preinscription</span>
+            <h3>2.1 - تعديل دالة verify_student()</h3>
+            <p><strong>الهدف:</strong> تطبيق قواعد الدخول الجديدة وتمرير الحالة الصحيحة للمتعلم إلى الجلسة (Session).</p>
+            <p><strong>الإجراء:</strong> قم باستبدال دالة <code style="color: #333; background: none; padding: 0; direction: ltr;">verify_student</code> بالكامل بهذا الكود المحدث (مع التصحيح):</p>
+            <pre><code><span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">verify_student</span>()
 {
+    <span class="variable">$this</span>->form_validation-><span class="function-name">set_rules</span>(<span class="string">'enpr'</span>, <span class="string">'رقم الاستمارة'</span>, <span class="string">'required|numeric'</span>);
+    <span class="variable">$this</span>->form_validation-><span class="function-name">set_rules</span>(<span class="string">'code_annexe'</span>, <span class="string">'رمز المركز'</span>, <span class="string">'required|numeric'</span>);
+    <span class="variable">$this</span>->form_validation-><span class="function-name">set_rules</span>(<span class="string">'captcha'</span>, <span class="string">'رمز التحقق'</span>, <span class="string">'required|trim|callback_check_captcha'</span>);
+    
+    <span class="variable">$is_presumed</span> <span class="operator">=</span> <span class="variable">$this</span>->input-><span class="function-name">post</span>(<span class="string">'pre'</span>) <span class="operator">==</span> 1;
 
-    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">__construct</span>()
-    {
-        <span class="keyword">parent</span><span class="operator">::</span><span class="function-name">__construct</span>();
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">helper</span>([<span class="string">'url'</span>, <span class="string">'form'</span>]);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">library</span>([<span class="string">'session'</span>, <span class="string">'form_validation'</span>]);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">model</span>(<span class="string">'M_inscriptic_eleve'</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">config</span><span class="operator">-&gt;</span><span class="function-name">load</span>(<span class="string">'onefd_auth'</span>, <span class="variable">TRUE</span>);
+    <span class="keyword">if</span> (<span class="variable">$is_presumed</span>) {
+        <span class="variable">$this</span>->form_validation-><span class="function-name">set_rules</span>(<span class="string">'annee'</span>, <span class="string">'سنة الميلاد'</span>, <span class="string">'required|numeric|exact_length[4]'</span>);
+    } <span class="keyword">else</span> {
+        <span class="variable">$this</span>->form_validation-><span class="function-name">set_rules</span>(<span class="string">'annee'</span>, <span class="string">'سنة الميلاد'</span>, <span class="string">'required|numeric|exact_length[4]'</span>);
+        <span class="variable">$this</span>->form_validation-><span class="function-name">set_rules</span>(<span class="string">'mois'</span>, <span class="string">'شهر الميلاد'</span>, <span class="string">'required|numeric|exact_length[2]'</span>);
+        <span class="variable">$this</span>->form_validation-><span class="function-name">set_rules</span>(<span class="string">'jour'</span>, <span class="string">'يوم الميلاد'</span>, <span class="string">'required|numeric|exact_length[2]'</span>);
     }
 
-    <span class="comment">/**
-     * الخطوة 1: عرض صفحة اختيار المركز الولائي
-     */</span>
-    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">index</span>()
-    {
-        <span class="variable">$data</span>[<span class="string">'title'</span>] <span class="operator">=</span> <span class="string">'إرفاق الوثائق - اختيار المركز'</span>;
-        <span class="variable">$data</span>[<span class="string">'centers'</span>] <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">Operation_model</span><span class="operator">-&gt;</span><span class="function-name">getAllcwefds</span>();
-        <span class="variable">$data</span>[<span class="string">'fich_js'</span>] <span class="operator">=</span> <span class="string">''</span>;
+    <span class="variable">$code_annexe</span> <span class="operator">=</span> <span class="variable">$this</span>->input-><span class="function-name">post</span>(<span class="string">'code_annexe'</span>);
 
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_select_wilaya_view'</span>, <span class="variable">$data</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
-    }
-
-    <span class="comment">/**
-     * الخطوة 2: استقبال الولاية وعرض صفحة التحقق
-     */</span>
-    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">auth</span>()
-    {
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">set_rules</span>(<span class="string">'code_annexe'</span>, <span class="string">'المركز الولائي'</span>, <span class="string">'required|numeric'</span>);
-
-        <span class="keyword">if</span> (<span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">run</span>() <span class="operator">==</span> <span class="variable">FALSE</span>) {
-            <span class="function-name">redirect</span>(<span class="string">'upload_documents'</span>);
-        } <span class="keyword">else</span> {
-            <span class="variable">$data</span>[<span class="string">'title'</span>] <span class="operator">=</span> <span class="string">'إرفاق الوثائق - التحقق من الهوية'</span>;
-            <span class="variable">$data</span>[<span class="string">'code_annexe'</span>] <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">input</span><span class="operator">-&gt;</span><span class="function-name">post</span>(<span class="string">'code_annexe'</span>);
-            <span class="variable">$data</span>[<span class="string">'captcha'</span>] <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="function-name">_create_captcha</span>();
-            <span class="variable">$data</span>[<span class="string">'fich_js'</span>] <span class="operator">=</span> <span class="string">''</span>;
-
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_auth_view'</span>, <span class="variable">$data</span>);
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
-        }
-    }
-
-    <span class="comment">/**
-     * الخطوة 3: التحقق من هوية المتعلم وتطبيق جميع القواعد الجديدة
-     */</span>
-    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">verify_student</span>()
-    {
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">set_rules</span>(<span class="string">'enpr'</span>, <span class="string">'رقم الاستمارة'</span>, <span class="string">'required|numeric'</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">set_rules</span>(<span class="string">'code_annexe'</span>, <span class="string">'رمز المركز'</span>, <span class="string">'required|numeric'</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">set_rules</span>(<span class="string">'captcha'</span>, <span class="string">'رمز التحقق'</span>, <span class="string">'required|trim|callback_check_captcha'</span>);
-        
-        <span class="variable">$is_presumed</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">input</span><span class="operator">-&gt;</span><span class="function-name">post</span>(<span class="string">'pre'</span>) <span class="operator">==</span> <span class="variable">1</span>;
+    <span class="keyword">if</span> (<span class="variable">$this</span>->form_validation-><span class="function-name">run</span>() <span class="operator">==</span> <span class="keyword">FALSE</span>) {
+        <span class="variable">$this</span>-><span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>);
+    } <span class="keyword">else</span> {
+        <span class="variable">$enpr</span> <span class="operator">=</span> <span class="variable">$this</span>->input-><span class="function-name">post</span>(<span class="string">'enpr'</span>);
 
         <span class="keyword">if</span> (<span class="variable">$is_presumed</span>) {
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">set_rules</span>(<span class="string">'annee'</span>, <span class="string">'سنة الميلاد'</span>, <span class="string">'required|numeric|exact_length[4]'</span>);
+            <span class="variable">$dns</span> <span class="operator">=</span> <span class="variable">$this</span>->input-><span class="function-name">post</span>(<span class="string">'annee'</span>) <span class="operator">.</span> <span class="string">'-01-01'</span>;
+            <span class="variable">$presume_flag</span> <span class="operator">=</span> 1;
         } <span class="keyword">else</span> {
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">set_rules</span>(<span class="string">'annee'</span>, <span class="string">'سنة الميلاد'</span>, <span class="string">'required|numeric|exact_length[4]'</span>);
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">set_rules</span>(<span class="string">'mois'</span>, <span class="string">'شهر الميلاد'</span>, <span class="string">'required|numeric|exact_length[2]'</span>);
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">set_rules</span>(<span class="string">'jour'</span>, <span class="string">'يوم الميلاد'</span>, <span class="string">'required|numeric|exact_length[2]'</span>);
+            <span class="variable">$dns</span> <span class="operator">=</span> <span class="variable">$this</span>->input-><span class="function-name">post</span>(<span class="string">'annee'</span>) <span class="operator">.</span> <span class="string">'-'</span> <span class="operator">.</span> <span class="variable">$this</span>->input-><span class="function-name">post</span>(<span class="string">'mois'</span>) <span class="operator">.</span> <span class="string">'-'</span> <span class="operator">.</span> <span class="variable">$this</span>->input-><span class="function-name">post</span>(<span class="string">'jour'</span>);
+            <span class="variable">$presume_flag</span> <span class="operator">=</span> 0;
         }
+        
+        <span class="variable">$param</span> <span class="operator">=</span> [
+            <span class="string">'ENPR'</span> <span class="operator">=></span> <span class="variable">$enpr</span>,
+            <span class="string">'DNS'</span> <span class="operator">=></span> <span class="variable">$dns</span>,
+            <span class="string">'PRESUME'</span> <span class="operator">=></span> <span class="variable">$presume_flag</span>,
+            <span class="string">'CODE_ANNEXE'</span> <span class="operator">=></span> <span class="variable">$code_annexe</span>
+        ];
 
-        <span class="variable">$code_annexe</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">input</span><span class="operator">-&gt;</span><span class="function-name">post</span>(<span class="string">'code_annexe'</span>);
+        <span class="variable">$student</span> <span class="operator">=</span> <span class="variable">$this</span>->M_inscriptic_eleve-><span class="function-name">inseleve_rechercheENBR_DNS</span>(<span class="variable">$param</span>);
 
-        <span class="keyword">if</span> (<span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">form_validation</span><span class="operator">-&gt;</span><span class="function-name">run</span>() <span class="operator">==</span> <span class="variable">FALSE</span>) {
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>);
-        } <span class="keyword">else</span> {
-            <span class="variable">$enpr</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">input</span><span class="operator">-&gt;</span><span class="function-name">post</span>(<span class="string">'enpr'</span>);
+        <span class="keyword">if</span> (<span class="variable">$student</span>) {
+            <span class="comment">// --- تطبيق القواعد الجديدة للإدارة ---</span>
+            <span class="variable">$is_paid</span> <span class="operator">=</span> (<span class="variable">$student</span>->PAYE <span class="operator">==</span> 1);
+            <span class="variable">$is_worker_child</span> <span class="operator">=</span> (<span class="variable">$student</span>->PAYE <span class="operator">==</span> 5); <span class="comment">// تحديث: PAYE=5</span>
+            <span class="variable">$is_reeducation</span> <span class="operator">=</span> (<span class="variable">$student</span>->FRAISINS <span class="operator">==</span> 1500); <span class="comment">// == تصحيح: FRAISINS ==</span>
 
-            <span class="keyword">if</span> (<span class="variable">$is_presumed</span>) {
-                <span class="variable">$dns</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">input</span><span class="operator">-&gt;</span><span class="function-name">post</span>(<span class="string">'annee'</span>) <span class="operator">.</span> <span class="string">'-01-01'</span>;
-                <span class="variable">$presume_flag</span> <span class="operator">=</span> <span class="variable">1</span>;
-            } <span class="keyword">else</span> {
-                <span class="variable">$dns</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">input</span><span class="operator">-&gt;</span><span class="function-name">post</span>(<span class="string">'annee'</span>) <span class="operator">.</span> <span class="string">'-'</span> <span class="operator">.</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">input</span><span class="operator">-&gt;</span><span class="function-name">post</span>(<span class="string">'mois'</span>) <span class="operator">.</span> <span class="string">'-'</span> <span class="operator">.</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">input</span><span class="operator">-&gt;</span><span class="function-name">post</span>(<span class="string">'jour'</span>);
-                <span class="variable">$presume_flag</span> <span class="operator">=</span> <span class="variable">0</span>;
+            <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$is_paid</span> <span class="operator">&&</span> <span class="operator">!</span><span class="variable">$is_worker_child</span> <span class="operator">&&</span> <span class="operator">!</span><span class="variable">$is_reeducation</span>) {
+                <span class="variable">$this</span>->session-><span class="function-name">set_flashdata</span>(<span class="string">'upload_error'</span>, <span class="string">'لا يمكنك إرفاق الوثائق. يجب عليك دفع حقوق التسجيل أولاً أو أن تكون ضمن فئة معفاة.'</span>);
+                <span class="variable">$this</span>-><span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>);
+                <span class="keyword">return</span>;
             }
             
-            <span class="variable">$param</span> <span class="operator">=</span> [
-                <span class="string">'ENPR'</span> <span class="operator">=&gt;</span> <span class="variable">$enpr</span>,
-                <span class="string">'DNS'</span> <span class="operator">=&gt;</span> <span class="variable">$dns</span>,
-                <span class="string">'PRESUME'</span> <span class="operator">=&gt;</span> <span class="variable">$presume_flag</span>,
-                <span class="string">'CODE_ANNEXE'</span> <span class="operator">=&gt;</span> <span class="variable">$code_annexe</span>
+            <span class="variable">$db_conn</span> <span class="operator">=</span> <span class="variable">$this</span>->load-><span class="function-name">database</span>(<span class="string">'preinscription'</span> <span class="operator">.</span> <span class="variable">$code_annexe</span>, <span class="keyword">true</span>);
+            <span class="variable">$existing_docs</span> <span class="operator">=</span> <span class="variable">$db_conn</span>-><span class="function-name">where</span>(<span class="string">'enpr'</span>, <span class="variable">$student</span>->ENPR)-><span class="function-name">get</span>(<span class="string">'student_documents'</span>)-><span class="function-name">row</span>();
+
+            <span class="keyword">if</span> (<span class="variable">$existing_docs</span>) {
+                <span class="variable">$this</span>->session-><span class="function-name">set_flashdata</span>(<span class="string">'upload_error'</span>, <span class="string">'لقد قمت بإرفاق وثائقك مسبقًا. لا يمكنك إرفاقها مرة أخرى.'</span>);
+                <span class="variable">$this</span>-><span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>);
+                <span class="keyword">return</span>;
+            }
+            
+            <span class="variable">$is_returning_student</span> <span class="operator">=</span> (<span class="variable">$student</span>->ANNEEINS <span class="operator"><</span> 2026);
+            
+            <span class="comment">// --- المنطق الجديد لتاريخ الميلاد ---</span>
+            <span class="variable">$show_extra_fields</span> <span class="operator">=</span> <span class="keyword">false</span>; <span class="comment">// هل نظهر الحقول 5 و 6؟</span>
+            <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$is_returning_student</span> <span class="operator">&&</span> <span class="operator">!</span><span class="variable">$is_reeducation</span>) {
+                <span class="variable">$birth_date_obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="function-name">DateTime</span>(<span class="variable">$student</span>->DNS);
+                <span class="variable">$cutoff_date</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="function-name">DateTime</span>(<span class="string">'1997-01-01'</span>); <span class="comment">// التاريخ الجديد</span>
+                <span class="keyword">if</span> (<span class="variable">$birth_date_obj</span> <span class="operator"><</span> <span class="variable">$cutoff_date</span>) {
+                    <span class="variable">$show_extra_fields</span> <span class="operator">=</span> <span class="keyword">true</span>; <span class="comment">// مولود قبل 1997: أظهر 6 حقول</span>
+                }
+            }
+            
+            <span class="variable">$session_data</span> <span class="operator">=</span> [
+                <span class="string">'upload_student_enpr'</span> <span class="operator">=></span> <span class="variable">$student</span>->ENPR,
+                <span class="string">'upload_student_name'</span> <span class="operator">=></span> <span class="variable">$student</span>->NOM <span class="operator">.</span> <span class="string">' '</span> <span class="operator">.</span> <span class="variable">$student</span>->PRENOM,
+                <span class="string">'upload_student_dns'</span> <span class="operator">=></span> <span class="variable">$student</span>->DNS,
+                <span class="string">'upload_student_annexe'</span> <span class="operator">=></span> <span class="variable">$student</span>->ANNEXE,
+                <span class="string">'is_returning_student'</span> <span class="operator">=></span> <span class="variable">$is_returning_student</span>,
+                <span class="string">'is_reeducation_student'</span> <span class="operator">=></span> <span class="variable">$is_reeducation</span>,
+                <span class="string">'is_worker_child'</span> <span class="operator">=></span> <span class="variable">$is_worker_child</span>,
+                <span class="string">'show_extra_fields'</span> <span class="operator">=></span> <span class="variable">$show_extra_fields</span> <span class="comment">// متغير جديد للجلسة</span>
             ];
+            <span class="variable">$this</span>->session-><span class="function-name">set_userdata</span>(<span class="variable">$session_data</span>);
+            <span class="function-name">redirect</span>(<span class="string">'upload_documents/upload_form'</span>);
 
-            <span class="variable">$student</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">M_inscriptic_eleve</span><span class="operator">-&gt;</span><span class="function-name">inseleve_rechercheENBR_DNS</span>(<span class="variable">$param</span>);
+        } <span class="keyword">else</span> {
+            <span class="variable">$this</span>->session-><span class="function-name">set_flashdata</span>(<span class="string">'upload_error'</span>, <span class="string">'المعلومات المدخلة غير صحيحة. لا يوجد متعلم مسجل بهذه البيانات.'</span>);
+            <span class="variable">$this</span>-><span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>);
+        }
+    }
+}</code></pre>
 
-            <span class="keyword">if</span> (<span class="variable">$student</span>) {
-                <span class="comment">// --- تطبيق القواعد الجديدة للإدارة (تحديث 06/11) ---</span>
-                <span class="variable">$is_paid</span> <span class="operator">=</span> (<span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">PAYE</span> <span class="operator">==</span> <span class="variable">1</span>);
-                <span class="variable">$is_worker_child</span> <span class="operator">=</span> (<span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">PAYE</span> <span class="operator">==</span> <span class="variable">1500</span>);
-                <span class="variable">$is_reeducation</span> <span class="operator">=</span> (<span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">FRAIS</span> <span class="operator">==</span> <span class="variable">1500</span>);
+            <h3>2.2 - تعديل دالة do_upload()</h3>
+            <p><strong>الهدف:</strong> تحديد الملفات الإجبارية بدقة بناءً على القواعد الجديدة.</p>
+            <pre><code><span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">do_upload</span>()
+{
+    <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>)) { <span class="function-name">redirect</span>(<span class="string">'upload_documents'</span>); }
 
-                <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$is_paid</span> <span class="operator">&amp;&amp;</span> <span class="operator">!</span><span class="variable">$is_worker_child</span> <span class="operator">&amp;&amp;</span> <span class="operator">!</span><span class="variable">$is_reeducation</span>) {
-                    <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">set_flashdata</span>(<span class="string">'upload_error'</span>, <span class="string">'لا يمكنك إرفاق الوثائق. يجب عليك دفع حقوق التسجيل أولاً أو أن تكون ضمن فئة معفاة.'</span>);
-                    <span class="variable">$this</span><span class="operator">-&gt;</span><span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>);
-                    <span class="keyword">return</span>;
+    <span class="variable">$enpr</span> <span class="operator">=</span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>);
+    <span class="variable">$annexe</span> <span class="operator">=</span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_annexe'</span>);
+    <span class="variable">$is_returning</span> <span class="operator">=</span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'is_returning_student'</span>);
+    <span class="variable">$is_reeducation</span> <span class="operator">=</span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'is_reeducation_student'</span>);
+    <span class="variable">$show_extra_fields</span> <span class="operator">=</span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'show_extra_fields'</span>);
+    
+    <span class="variable">$current_iannee</span> <span class="operator">=</span> <span class="variable">$this</span>->config-><span class="function-name">item</span>(<span class="string">'annee_inscript'</span>, <span class="string">'onefd_auth'</span>);
+    <span class="variable">$year_parts</span> <span class="operator">=</span> <span class="function-name">explode</span>(<span class="string">'/'</span>, <span class="variable">$current_iannee</span>);
+    <span class="variable">$school_year_part</span> <span class="operator">=</span> <span class="function-name">max</span>(<span class="function-name">intval</span>(<span class="variable">$year_parts</span>[0]), <span class="function-name">intval</span>(<span class="variable">$year_parts</span>[1]));
+
+    <span class="variable">$uploaded_urls</span> <span class="operator">=</span> [];
+    <span class="variable">$errors</span> <span class="operator">=</span> <span class="string">''</span>;
+    <span class="variable">$required_inputs</span> <span class="operator">=</span> [];
+
+    <span class="variable">$all_possible_files</span> <span class="operator">=</span> [
+        <span class="string">'doc_payment'</span>   <span class="operator">=></span> [<span class="string">'db_column'</span> <span class="operator">=></span> <span class="string">'doc_payment_receipt_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=></span> <span class="string">'01'</span>],
+        <span class="string">'doc_birth'</span>     <span class="operator">=></span> [<span class="string">'db_column'</span> <span class="operator">=></span> <span class="string">'doc_birth_certificate_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=></span> <span class="string">'02'</span>],
+        <span class="string">'doc_photo'</span>     <span class="operator">=></span> [<span class="string">'db_column'</span> <span class="operator">=></span> <span class="string">'doc_photo_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=></span> <span class="string">'03'</span>],
+        <span class="string">'doc_statement'</span> <span class="operator">=></span> [<span class="string">'db_column'</span> <span class="operator">=></span> <span class="string">'doc_sworn_statement_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=></span> <span class="string">'04'</span>],
+        <span class="string">'doc_school'</span>    <span class="operator">=></span> [<span class="string">'db_column'</span> <span class="operator">=></span> <span class="string">'doc_school_certificate_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=></span> <span class="string">'05'</span>],
+        <span class="string">'doc_grades'</span>    <span class="operator">=></span> [<span class="string">'db_column'</span> <span class="operator">=></span> <span class="string">'doc_transcript_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=></span> <span class="string">'06'</span>]
+    ];
+
+    <span class="comment">// --- تحديد الملفات الإجبارية بناءً على القواعد الجديدة ---</span>
+    <span class="keyword">if</span> (<span class="variable">$is_returning</span>) {
+        <span class="variable">$required_inputs</span> <span class="operator">=</span> [<span class="string">'doc_payment'</span>];
+    } <span class="keyword">elseif</span> (<span class="variable">$is_reeducation</span>) {
+        <span class="variable">$required_inputs</span> <span class="operator">=</span> [<span class="string">'doc_birth'</span>]; <span class="comment">// شهادة الميلاد فقط</span>
+    } <span class="keyword">else</span> {
+        <span class="comment">// متعلم جديد (عادي أو ابن عامل)</span>
+        <span class="variable">$required_inputs</span> <span class="operator">=</span> [<span class="string">'doc_payment'</span>, <span class="string">'doc_birth'</span>, <span class="string">'doc_photo'</span>, <span class="string">'doc_statement'</span>];
+        <span class="comment">// الوثائق الإضافية ليست إجبارية</span>
+    }
+    
+    <span class="variable">$upload_base_path</span> <span class="operator">=</span> <span class="string">'./uploads/'</span>; 
+    <span class="variable">$wilaya_path</span> <span class="operator">=</span> <span class="variable">$upload_base_path</span> <span class="operator">.</span> <span class="variable">$annexe</span> <span class="operator">.</span> <span class="string">'/'</span>;
+    <span class="keyword">if</span> (<span class="operator">!</span><span class="function-name">is_dir</span>(<span class="variable">$wilaya_path</span>)) {
+        <span class="function-name">mkdir</span>(<span class="variable">$wilaya_path</span>, 0777, <span class="keyword">TRUE</span>);
+    }
+
+    <span class="variable">$this</span>->load-><span class="function-name">library</span>(<span class="string">'upload'</span>);
+    <span class="variable">$files_processed_count</span> <span class="operator">=</span> 0;
+    <span class="variable">$missing_required_files</span> <span class="operator">=</span> <span class="keyword">false</span>;
+
+    <span class="keyword">foreach</span> (<span class="variable">$required_inputs</span> <span class="keyword">as</span> <span class="variable">$input_name</span>) {
+        <span class="keyword">if</span> (<span class="function-name">empty</span>(<span class="variable">$_FILES</span>[<span class="variable">$input_name</span>][<span class="string">'name'</span>])) {
+            <span class="variable">$missing_required_files</span> <span class="operator">=</span> <span class="keyword">true</span>;
+            <span class="keyword">break</span>;
+        }
+    }
+
+    <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$missing_required_files</span>) {
+        <span class="keyword">foreach</span> (<span class="variable">$all_possible_files</span> <span class="keyword">as</span> <span class="variable">$input_name</span> <span class="operator">=></span> <span class="variable">$file_info</span>) {
+            <span class="keyword">if</span> (<span class="operator">!</span><span class="function-name">empty</span>(<span class="variable">$_FILES</span>[<span class="variable">$input_name</span>][<span class="string">'name'</span>])) {
+                
+                <span class="variable">$file_name</span> <span class="operator">=</span> <span class="variable">$annexe</span> <span class="operator">.</span> <span class="variable">$school_year_part</span> <span class="operator">.</span> <span class="function-name">str_pad</span>(<span class="variable">$enpr</span>, 5, <span class="string">'0'</span>, <span class="variable">STR_PAD_LEFT</span>) <span class="operator">.</span> <span class="variable">$file_info</span>[<span class="string">'doc_num'</span>] <span class="operator">.</span> <span class="string">'.pdf'</span>;
+                <span class="variable">$config</span>[<span class="string">'upload_path'</span>]    <span class="operator">=</span> <span class="variable">$wilaya_path</span>;
+                <span class="variable">$config</span>[<span class="string">'allowed_types'</span>]  <span class="operator">=</span> <span class="string">'pdf'</span>;
+                <span class="variable">$config</span>[<span class="string">'max_size'</span>]       <span class="operator">=</span> 2048;
+                <span class="variable">$config</span>[<span class="string">'file_name'</span>]      <span class="operator">=</span> <span class="variable">$file_name</span>;
+                
+                <span class="variable">$this</span>->upload-><span class="function-name">initialize</span>(<span class="variable">$config</span>);
+
+                <span class="keyword">if</span> (<span class="variable">$this</span>->upload-><span class="function-name">do_upload</span>(<span class="variable">$input_name</span>)) {
+                    <span class="variable">$upload_data</span> <span class="operator">=</span> <span class="variable">$this</span>->upload-><span class="function-name">data</span>();
+                    <span class="variable">$uploaded_urls</span>[<span class="variable">$file_info</span>[<span class="string">'db_column'</span>]] <span class="operator">=</span> <span class="function-name">base_url</span>(<span class="function-name">str_replace</span>(<span class="string">'./'</span>, <span class="string">''</span>, <span class="variable">$wilaya_path</span>) <span class="operator">.</span> <span class="variable">$upload_data</span>[<span class="string">'file_name'</span>]);
+                    <span class="variable">$files_processed_count</span><span class="operator">++</span>;
+                } <span class="keyword">else</span> {
+                    <span class="variable">$errors</span> <span class="operator">.=</span> <span class="string">'&lt;p&gt;خطأ في رفع ملف ('</span> <span class="operator">.</span> <span class="variable">$input_name</span> <span class="operator">.</span> <span class="string">'): '</span> <span class="operator">.</span> <span class="variable">$this</span>->upload-><span class="function-name">display_errors</span>(<span class="string">''</span>, <span class="string">''</span>) <span class="operator">.</span> <span class="string">'&lt;/p&gt;'</span>;
                 }
-                
-                <span class="variable">$db_conn</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">database</span>(<span class="string">'preinscription'</span> <span class="operator">.</span> <span class="variable">$code_annexe</span>, <span class="variable">true</span>);
-                <span class="variable">$existing_docs</span> <span class="operator">=</span> <span class="variable">$db_conn</span><span class="operator">-&gt;</span><span class="function-name">where</span>(<span class="string">'enpr'</span>, <span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">ENPR</span>)<span class="operator">-&gt;</span><span class="function-name">get</span>(<span class="string">'student_documents'</span>)<span class="operator">-&gt;</span><span class="function-name">row</span>();
-
-                <span class="keyword">if</span> (<span class="variable">$existing_docs</span>) {
-                    <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">set_flashdata</span>(<span class="string">'upload_error'</span>, <span class="string">'لقد قمت بإرفاق وثائقك مسبقًا. لا يمكنك إرفاقها مرة أخرى.'</span>);
-                    <span class="variable">$this</span><span class="operator">-&gt;</span><span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>);
-                    <span class="keyword">return</span>;
-                }
-                
-                <span class="variable">$is_returning_student</span> <span class="operator">=</span> (<span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">ANNEEINS</span> <span class="operator">&lt;</span> <span class="variable">2026</span>);
-                <span class="variable">$requires_extra_docs</span> <span class="operator">=</span> <span class="variable">false</span>;
-                
-                <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$is_returning_student</span> <span class="operator">&amp;&amp;</span> (<span class="variable">$is_paid</span> <span class="operator">||</span> <span class="variable">$is_worker_child</span>)) {
-                    <span class="variable">$requires_extra_docs</span> <span class="operator">=</span> <span class="variable">true</span>;
-                }
-                
-                <span class="variable">$session_data</span> <span class="operator">=</span> [
-                    <span class="string">'upload_student_enpr'</span> <span class="operator">=&gt;</span> <span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">ENPR</span>,
-                    <span class="string">'upload_student_name'</span> <span class="operator">=&gt;</span> <span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">NOM</span> <span class="operator">.</span> <span class="string">' '</span> <span class="operator">.</span> <span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">PRENOM</span>,
-                    <span class="string">'upload_student_dns'</span> <span class="operator">=&gt;</span> <span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">DNS</span>, <span class="comment">// جديد: لإضافته للوصل</span>
-                    <span class="string">'upload_student_annexe'</span> <span class="operator">=&gt;</span> <span class="variable">$student</span><span class="operator">-&gt;</span><span class="variable">ANNEXE</span>,
-                    <span class="string">'is_returning_student'</span> <span class="operator">=&gt;</span> <span class="variable">$is_returning_student</span>,
-                    <span class="string">'is_reeducation_student'</span> <span class="operator">=&gt;</span> <span class="variable">$is_reeducation</span>, <span class="comment">// جديد</span>
-                    <span class="string">'is_worker_child'</span> <span class="operator">=&gt;</span> <span class="variable">$is_worker_child</span>, <span class="comment">// جديد</span>
-                    <span class="string">'requires_extra_docs'</span> <span class="operator">=&gt;</span> <span class="variable">$requires_extra_docs</span>
-                ];
-                <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">set_userdata</span>(<span class="variable">$session_data</span>);
-                <span class="function-name">redirect</span>(<span class="string">'upload_documents/upload_form'</span>);
-
-            } <span class="keyword">else</span> {
-                <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">set_flashdata</span>(<span class="string">'upload_error'</span>, <span class="string">'المعلومات المدخلة غير صحيحة. لا يوجد متعلم مسجل بهذه البيانات.'</span>);
-                <span class="variable">$this</span><span class="operator">-&gt;</span><span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>);
             }
         }
     }
     
-    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">upload_form</span>()
-    {
-        <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>)) {
-            <span class="function-name">redirect</span>(<span class="string">'upload_documents'</span>);
-        }
-        <span class="variable">$data</span>[<span class="string">'title'</span>] <span class="operator">=</span> <span class="string">'إرفاق الوثائق'</span>;
-        <span class="variable">$data</span>[<span class="string">'fich_js'</span>] <span class="operator">=</span> <span class="string">''</span>; 
-        <span class="variable">$data</span>[<span class="string">'is_returning'</span>] <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'is_returning_student'</span>);
-        <span class="variable">$data</span>[<span class="string">'is_reeducation'</span>] <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'is_reeducation_student'</span>);
-        <span class="variable">$data</span>[<span class="string">'requires_extra_docs'</span>] <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'requires_extra_docs'</span>);
+    <span class="variable">$data</span> <span class="operator">=</span> [
+        <span class="string">'title'</span> <span class="operator">=></span> <span class="string">'إرفاق الوثائق'</span>,
+        <span class="string">'fich_js'</span> <span class="operator">=></span> <span class="string">''</span>,
+        <span class="string">'is_returning'</span> <span class="operator">=></span> <span class="variable">$is_returning</span>,
+        <span class="string">'is_reeducation'</span> <span class="operator">=></span> <span class="variable">$is_reeducation</span>,
+        <span class="string">'show_extra_fields'</span> <span class="operator">=></span> <span class="variable">$show_extra_fields</span>
+    ];
 
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_form_view'</span>, <span class="variable">$data</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
+    <span class="keyword">if</span> (<span class="operator">!</span><span class="function-name">empty</span>(<span class="variable">$errors</span>)) {
+        <span class="variable">$data</span>[<span class="string">'error'</span>] <span class="operator">=</span> <span class="variable">$errors</span>;
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_form_view'</span>, <span class="variable">$data</span>);
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
+    } <span class="keyword">else if</span> (<span class="variable">$missing_required_files</span>) {
+        <span class="variable">$data</span>[<span class="string">'error'</span>] <span class="operator">=</span> <span class="string">'خطأ: يجب إرفاق جميع الوثائق الإجبارية المحددة لحالتك.'</span>;
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_form_view'</span>, <span class="variable">$data</span>);
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
+    } <span class="keyword">else if</span> (<span class="variable">$files_processed_count</span> <span class="operator">==</span> 0) {
+        <span class="variable">$data</span>[<span class="string">'error'</span>] <span class="operator">=</span> <span class="string">'خطأ: لم تقم بإرفاق أي ملفات.'</span>;
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_form_view'</span>, <span class="variable">$data</span>);
+        <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
+    } <span class="keyword">else</span> {
+        <span class="variable">$db_conn</span> <span class="operator">=</span> <span class="variable">$this</span>->load-><span class="function-name">database</span>(<span class="string">'preinscription'</span> <span class="operator">.</span> <span class="variable">$annexe</span>, <span class="keyword">true</span>);
+        <span class="variable">$db_data</span> <span class="operator">=</span> <span class="variable">$uploaded_urls</span>;
+        <span class="variable">$db_data</span>[<span class="string">'enpr'</span>] <span class="operator">=</span> <span class="variable">$enpr</span>;
+        
+        <span class="variable">$db_conn</span>-><span class="function-name">replace</span>(<span class="string">'student_documents'</span>, <span class="variable">$db_data</span>);
+        
+        <span class="variable">$this</span>-><span class="function-name">_show_success_page</span>(<span class="variable">$uploaded_urls</span>);
     }
+}</code></pre>
 
-    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">do_upload</span>()
-    {
-        <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>)) { <span class="function-name">redirect</span>(<span class="string">'upload_documents'</span>); }
+            <h3>2.3 - تعديل دالة _show_success_page()</h3>
+            <p><strong>الهدف:</strong> إضافة بيانات المتعلم (الاسم، رقم الاستمارة، تاريخ الميلاد) إلى الوصل.</p>
+            <pre><code><span class="keyword">private</span> <span class="keyword">function</span> <span class="function-name">_show_success_page</span>(<span class="variable">$uploaded_urls</span>)
+{
+    <span class="variable">$doc_labels</span> <span class="operator">=</span> [
+        <span class="string">'doc_payment_receipt_url'</span> <span class="operator">=></span> <span class="string">'وصل الدفع'</span>,
+        <span class="string">'doc_birth_certificate_url'</span> <span class="operator">=></span> <span class="string">'شهادة الميلاد'</span>,
+        <span class="string">'doc_photo_url'</span> <span class="operator">=></span> <span class="string">'الصورة الشمسية'</span>,
+        <span class="string">'doc_sworn_statement_url'</span> <span class="operator">=></span> <span class="string">'التصريح الشرفي'</span>,
+        <span class="string">'doc_school_certificate_url'</span> <span class="operator">=></span> <span class="string">'شهادة مدرسية أو شهادة التحرر من محو الأمية'</span>,
+        <span class="string">'doc_transcript_url'</span> <span class="operator">=></span> <span class="string">'كشف النقاط'</span>
+    ];
 
-        <span class="variable">$enpr</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>);
-        <span class="variable">$annexe</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_annexe'</span>);
-        <span class="variable">$is_returning</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'is_returning_student'</span>);
-        <span class="variable">$is_reeducation</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'is_reeducation_student'</span>);
-        <span class="variable">$requires_extra</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'requires_extra_docs'</span>);
-        
-        <span class="variable">$current_iannee</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">config</span><span class="operator">-&gt;</span><span class="function-name">item</span>(<span class="string">'annee_inscript'</span>, <span class="string">'onefd_auth'</span>);
-        <span class="variable">$year_parts</span> <span class="operator">=</span> <span class="function-name">explode</span>(<span class="string">'/'</span>, <span class="variable">$current_iannee</span>);
-        <span class="variable">$school_year_part</span> <span class="operator">=</span> <span class="function-name">max</span>(<span class="function-name">intval</span>(<span class="variable">$year_parts</span>[<span class="variable">0</span>]), <span class="function-name">intval</span>(<span class="variable">$year_parts</span>[<span class="variable">1</span>]));
-
-        <span class="variable">$uploaded_urls</span> <span class="operator">=</span> [];
-        <span class="variable">$errors</span> <span class="operator">=</span> <span class="string">''</span>;
-        <span class="variable">$required_inputs</span> <span class="operator">=</span> [];
-
-        <span class="variable">$all_possible_files</span> <span class="operator">=</span> [
-            <span class="string">'doc_payment'</span>   <span class="operator">=&gt;</span> [<span class="string">'db_column'</span> <span class="operator">=&gt;</span> <span class="string">'doc_payment_receipt_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=&gt;</span> <span class="string">'01'</span>],
-            <span class="string">'doc_birth'</span>     <span class="operator">=&gt;</span> [<span class="string">'db_column'</span> <span class="operator">=&gt;</span> <span class="string">'doc_birth_certificate_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=&gt;</span> <span class="string">'02'</span>],
-            <span class="string">'doc_photo'</span>     <span class="operator">=&gt;</span> [<span class="string">'db_column'</span> <span class="operator">=&gt;</span> <span class="string">'doc_photo_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=&gt;</span> <span class="string">'03'</span>],
-            <span class="string">'doc_statement'</span> <span class="operator">=&gt;</span> [<span class="string">'db_column'</span> <span class="operator">=&gt;</span> <span class="string">'doc_sworn_statement_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=&gt;</span> <span class="string">'04'</span>],
-            <span class="string">'doc_school'</span>    <span class="operator">=&gt;</span> [<span class="string">'db_column'</span> <span class="operator">=&gt;</span> <span class="string">'doc_school_certificate_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=&gt;</span> <span class="string">'05'</span>],
-            <span class="string">'doc_grades'</span>    <span class="operator">=&gt;</span> [<span class="string">'db_column'</span> <span class="operator">=&gt;</span> <span class="string">'doc_transcript_url'</span>, <span class="string">'doc_num'</span> <span class="operator">=&gt;</span> <span class="string">'06'</span>]
-        ];
-
-        <span class="comment">// تحديد الملفات الإجبارية بناءً على القواعد الجديدة</span>
-        <span class="keyword">if</span> (<span class="variable">$is_returning</span>) {
-            <span class="variable">$required_inputs</span> <span class="operator">=</span> [<span class="string">'doc_payment'</span>];
-        } <span class="keyword">elseif</span> (<span class="variable">$is_reeducation</span>) {
-            <span class="variable">$required_inputs</span> <span class="operator">=</span> [<span class="string">'doc_birth'</span>]; <span class="comment">// شهادة الميلاد فقط</span>
-        } <span class="keyword">else</span> {
-            <span class="variable">$required_inputs</span> <span class="operator">=</span> [<span class="string">'doc_payment'</span>, <span class="string">'doc_birth'</span>, <span class="string">'doc_photo'</span>, <span class="string">'doc_statement'</span>];
-            <span class="keyword">if</span> (<span class="variable">$requires_extra</span>) {
-                <span class="variable">$required_inputs</span> <span class="operator">=</span> <span class="function-name">array_merge</span>(<span class="variable">$required_inputs</span>, [<span class="string">'doc_school'</span>, <span class="string">'doc_grades'</span>]);
-            }
-        }
-        
-        <span class="variable">$upload_base_path</span> <span class="operator">=</span> <span class="string">'./uploads/'</span>; 
-        <span class="variable">$wilaya_path</span> <span class="operator">=</span> <span class="variable">$upload_base_path</span> <span class="operator">.</span> <span class="variable">$annexe</span> <span class="operator">.</span> <span class="string">'/'</span>;
-        <span class="keyword">if</span> (<span class="operator">!</span><span class="function-name">is_dir</span>(<span class="variable">$wilaya_path</span>)) {
-            <span class="function-name">mkdir</span>(<span class="variable">$wilaya_path</span>, <span class="variable">0777</span>, <span class="variable">TRUE</span>);
-        }
-
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">library</span>(<span class="string">'upload'</span>);
-        <span class="variable">$files_processed_count</span> <span class="operator">=</span> <span class="variable">0</span>;
-        <span class="variable">$missing_required_files</span> <span class="operator">=</span> <span class="variable">false</span>;
-
-        <span class="keyword">foreach</span> (<span class="variable">$required_inputs</span> <span class="keyword">as</span> <span class="variable">$input_name</span>) {
-            <span class="keyword">if</span> (<span class="function-name">empty</span>(<span class="variable">$_FILES</span>[<span class="variable">$input_name</span>][<span class="string">'name'</span>])) {
-                <span class="variable">$missing_required_files</span> <span class="operator">=</span> <span class="variable">true</span>;
-                <span class="keyword">break</span>;
-            }
-        }
-
-        <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$missing_required_files</span>) {
-            <span class="keyword">foreach</span> (<span class="variable">$all_possible_files</span> <span class="keyword">as</span> <span class="variable">$input_name</span> <span class="operator">=&gt;</span> <span class="variable">$file_info</span>) {
-                <span class="keyword">if</span> (<span class="operator">!</span><span class="function-name">empty</span>(<span class="variable">$_FILES</span>[<span class="variable">$input_name</span>][<span class="string">'name'</span>])) {
-                    
-                    <span class="variable">$file_name</span> <span class="operator">=</span> <span class="variable">$annexe</span> <span class="operator">.</span> <span class="variable">$school_year_part</span> <span class="operator">.</span> <span class="function-name">str_pad</span>(<span class="variable">$enpr</span>, <span class="variable">5</span>, <span class="string">'0'</span>, <span class="variable">STR_PAD_LEFT</span>) <span class="operator">.</span> <span class="variable">$file_info</span>[<span class="string">'doc_num'</span>] <span class="operator">.</span> <span class="string">'.pdf'</span>;
-                    <span class="variable">$config</span>[<span class="string">'upload_path'</span>]    <span class="operator">=</span> <span class="variable">$wilaya_path</span>;
-                    <span class="variable">$config</span>[<span class="string">'allowed_types'</span>]  <span class="operator">=</span> <span class="string">'pdf'</span>;
-                    <span class="variable">$config</span>[<span class="string">'max_size'</span>]       <span class="operator">=</span> <span class="variable">2048</span>;
-                    <span class="variable">$config</span>[<span class="string">'file_name'</span>]      <span class="operator">=</span> <span class="variable">$file_name</span>;
-                    
-                    <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">upload</span><span class="operator">-&gt;</span><span class="function-name">initialize</span>(<span class="variable">$config</span>);
-
-                    <span class="keyword">if</span> (<span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">upload</span><span class="operator">-&gt;</span><span class="function-name">do_upload</span>(<span class="variable">$input_name</span>)) {
-                        <span class="variable">$upload_data</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">upload</span><span class="operator">-&gt;</span><span class="function-name">data</span>();
-                        <span class="variable">$uploaded_urls</span>[<span class="variable">$file_info</span>[<span class="string">'db_column'</span>]] <span class="operator">=</span> <span class="function-name">base_url</span>(<span class="function-name">str_replace</span>(<span class="string">'./'</span>, <span class="string">''</span>, <span class="variable">$wilaya_path</span>) <span class="operator">.</span> <span class="variable">$upload_data</span>[<span class="string">'file_name'</span>]);
-                        <span class="variable">$files_processed_count</span><span class="operator">++</span>;
-                    } <span class="keyword">else</span> {
-                        <span class="variable">$errors</span> <span class="operator">.=</span> <span class="string">'&lt;p&gt;خطأ في رفع ملف ('</span> <span class="operator">.</span> <span class="variable">$input_name</span> <span class="operator">.</span> <span class="string">'): '</span> <span class="operator">.</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">upload</span><span class="operator">-&gt;</span><span class="function-name">display_errors</span>(<span class="string">''</span>, <span class="string">''</span>) <span class="operator">.</span> <span class="string">'&lt;/p&gt;'</span>;
-                    }
-                }
-            }
-        }
-        
-        <span class="variable">$data</span> <span class="operator">=</span> [
-            <span class="string">'title'</span> <span class="operator">=&gt;</span> <span class="string">'إرفاق الوثائق'</span>,
-            <span class="string">'fich_js'</span> <span class="operator">=&gt;</span> <span class="string">''</span>,
-            <span class="string">'is_returning'</span> <span class="operator">=&gt;</span> <span class="variable">$is_returning</span>,
-            <span class="string">'is_reeducation'</span> <span class="operator">=&gt;</span> <span class="variable">$is_reeducation</span>,
-            <span class="string">'requires_extra_docs'</span> <span class="operator">=&gt;</span> <span class="variable">$requires_extra</span>
-        ];
-
-        <span class="keyword">if</span> (<span class="operator">!</span><span class="function-name">empty</span>(<span class="variable">$errors</span>)) {
-            <span class="variable">$data</span>[<span class="string">'error'</span>] <span class="operator">=</span> <span class="variable">$errors</span>;
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_form_view'</span>, <span class="variable">$data</span>);
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
-        } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">$missing_required_files</span>) {
-             <span class="variable">$data</span>[<span class="string">'error'</span>] <span class="operator">=</span> <span class="string">'خطأ: يجب إرفاق جميع الوثائق الإجبارية المحددة لحالتك.'</span>;
-             <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
-             <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_form_view'</span>, <span class="variable">$data</span>);
-             <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
-        } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">$files_processed_count</span> <span class="operator">==</span> <span class="variable">0</span>) {
-             <span class="variable">$data</span>[<span class="string">'error'</span>] <span class="operator">=</span> <span class="string">'خطأ: لم تقم بإرفاق أي ملفات.'</span>;
-             <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
-             <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_form_view'</span>, <span class="variable">$data</span>);
-             <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
-        } <span class="keyword">else</span> {
-            <span class="variable">$db_conn</span> <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">database</span>(<span class="string">'preinscription'</span> <span class="operator">.</span> <span class="variable">$annexe</span>, <span class="variable">true</span>);
-            <span class="variable">$db_data</span> <span class="operator">=</span> <span class="variable">$uploaded_urls</span>;
-            <span class="variable">$db_data</span>[<span class="string">'enpr'</span>] <span class="operator">=</span> <span class="variable">$enpr</span>;
-            
-            <span class="variable">$db_conn</span><span class="operator">-&gt;</span><span class="function-name">replace</span>(<span class="string">'student_documents'</span>, <span class="variable">$db_data</span>);
-            
-            <span class="variable">$this</span><span class="operator">-&gt;</span><span class="function-name">_show_success_page</span>(<span class="variable">$uploaded_urls</span>);
+    <span class="variable">$display_files</span> <span class="operator">=</span> [];
+    <span class="keyword">foreach</span>(<span class="variable">$uploaded_urls</span> <span class="keyword">as</span> <span class="variable">$db_column</span> <span class="operator">=></span> <span class="variable">$url</span>) {
+        <span class="keyword">if</span> (<span class="function-name">isset</span>(<span class="variable">$doc_labels</span>[<span class="variable">$db_column</span>])) {
+            <span class="variable">$display_files</span>[<span class="variable">$doc_labels</span>[<span class="variable">$db_column</span>]] <span class="operator">=</span> <span class="variable">$url</span>;
         }
     }
-
-    <span class="keyword">private</span> <span class="keyword">function</span> <span class="function-name">_show_success_page</span>(<span class="variable">$uploaded_urls</span>)
-    {
-        <span class="variable">$doc_labels</span> <span class="operator">=</span> [
-            <span class="string">'doc_payment_receipt_url'</span> <span class="operator">=&gt;</span> <span class="string">'وصل الدفع'</span>,
-            <span class="string">'doc_birth_certificate_url'</span> <span class="operator">=&gt;</span> <span class="string">'شهادة الميلاد'</span>,
-            <span class="string">'doc_photo_url'</span> <span class="operator">=&gt;</span> <span class="string">'الصورة الشمسية'</span>,
-            <span class="string">'doc_sworn_statement_url'</span> <span class="operator">=&gt;</span> <span class="string">'التصريح الشرفي'</span>,
-            <span class="string">'doc_school_certificate_url'</span> <span class="operator">=&gt;</span> <span class="string">'شهادة مدرسية أو شهادة التحرر من محو الأمية'</span>,
-            <span class="string">'doc_transcript_url'</span> <span class="operator">=&gt;</span> <span class="string">'كشف النقاط'</span>
-        ];
-
-        <span class="variable">$display_files</span> <span class="operator">=</span> [];
-        <span class="keyword">foreach</span>(<span class="variable">$uploaded_urls</span> <span class="keyword">as</span> <span class="variable">$db_column</span> <span class="operator">=&gt;</span> <span class="variable">$url</span>) {
-            <span class="keyword">if</span> (<span class="function-name">isset</span>(<span class="variable">$doc_labels</span>[<span class="variable">$db_column</span>])) {
-                <span class="variable">$display_files</span>[<span class="variable">$doc_labels</span>[<span class="variable">$db_column</span>]] <span class="operator">=</span> <span class="variable">$url</span>;
-            }
-        }
-        <span class="variable">$data</span>[<span class="string">'uploaded_files_display'</span>] <span class="operator">=</span> <span class="variable">$display_files</span>;
-        <span class="variable">$data</span>[<span class="string">'title'</span>] <span class="operator">=</span> <span class="string">'نجاح الإرفاق'</span>;
-        <span class="variable">$data</span>[<span class="string">'fich_js'</span>] <span class="operator">=</span> <span class="string">''</span>;
-        
-        <span class="variable">$data</span>[<span class="string">'student_info'</span>] <span class="operator">=</span> [
-            <span class="string">'enpr'</span> <span class="operator">=&gt;</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>),
-            <span class="string">'name'</span> <span class="operator">=&gt;</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_name'</span>),
-            <span class="string">'dns'</span> <span class="operator">=&gt;</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_dns'</span>)
-        ];
-        
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_success_view'</span>, <span class="variable">$data</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
-        
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">sess_destroy</span>();
-    }
+    <span class="variable">$data</span>[<span class="string">'uploaded_files_display'</span>] <span class="operator">=</span> <span class="variable">$display_files</span>;
+    <span class="variable">$data</span>[<span class="string">'title'</span>] <span class="operator">=</span> <span class="string">'نجاح الإرفاق'</span>;
+    <span class="variable">$data</span>[<span class="string">'fich_js'</span>] <span class="operator">=</span> <span class="string">''</span>;
     
-    <span class="keyword">private</span> <span class="keyword">function</span> <span class="function-name">_show_auth_page_with_error</span>(<span class="variable">$code_annexe</span>)
-    {
-        <span class="variable">$data</span>[<span class="string">'title'</span>] <span class="operator">=</span> <span class="string">'إرفاق الوثائق - التحقق من الهوية'</span>;
-        <span class="variable">$data</span>[<span class="string">'code_annexe'</span>] <span class="operator">=</span> <span class="variable">$code_annexe</span>;
-        <span class="variable">$data</span>[<span class="string">'captcha'</span>] <span class="operator">=</span> <span class="variable">$this</span><span class="operator">-&gt;</span><span class="function-name">_create_captcha</span>();
-        <span class="variable">$data</span>[<span class="string">'fich_js'</span>] <span class="operator">=</span> <span class="string">''</span>;
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">keep_flashdata</span>(<span class="string">'upload_error'</span>);
-        
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_auth_view'</span>, <span class="variable">$data</span>);
-        <span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">load</span><span class="operator">-&gt;</span><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
+    <span class="comment">// --- التعديل: إضافة بيانات المتعلم للوصل ---</span>
+    <span class="variable">$data</span>[<span class="string">'student_info'</span>] <span class="operator">=</span> [
+        <span class="string">'enpr'</span> <span class="operator">=></span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>),
+        <span class="string">'name'</span> <span class="operator">=></span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_name'</span>),
+        <span class="string">'dns'</span> <span class="operator">=></span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_dns'</span>)
+    ];
+    
+    <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
+    <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_success_view'</span>, <span class="variable">$data</span>);
+    <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
+    
+    <span class="variable">$this</span>->session-><span class="function-name">sess_destroy</span>();
+}</code></pre>
+
+            <h3>2.4 - إضافة/تعديل دالة upload_form()</h3>
+            <p><strong>الهدف:</strong> ضمان قراءة المتغيرات من الجلسة وتمريرها للواجهة بشكل صحيح.</p>
+            <pre><code><span class="comment">/**
+ * عرض استمارة رفع الوثائق
+ * هذه الدالة تقرأ بيانات الجلسة وتعرض الواجهة الصحيحة
+ */</span>
+<span class="keyword">public</span> <span class="keyword">function</span> <span class="function-name">upload_form</span>()
+{
+    <span class="comment">// التأكد أولاً أن المتعلم قام بتسجيل الدخول عبر الواجهة الأولى</span>
+    <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>)) {
+        <span class="function-name">redirect</span>(<span class="string">'upload_documents'</span>);
     }
-}
-</code></pre>
+
+    <span class="comment">// جلب جميع المتغيرات من الجلسة</span>
+    <span class="variable">$is_returning</span> <span class="operator">=</span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'is_returning_student'</span>);
+    <span class="variable">$is_reeducation</span> <span class="operator">=</span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'is_reeducation_student'</span>);
+    <span class="variable">$show_extra_fields</span> <span class="operator">=</span> <span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'show_extra_fields'</span>);
+
+    <span class="comment">// تجهيز البيانات لإرسالها للواجهة</span>
+    <span class="variable">$data</span> <span class="operator">=</span> [
+        <span class="string">'title'</span> <span class="operator">=></span> <span class="string">'إرفاق الوثائق - الخطوة 3'</span>,
+        <span class="string">'fich_js'</span> <span class="operator">=></span> <span class="string">''</span>, <span class="comment">// لا حاجة لملف جافاسكريبت خاص هنا</span>
+        <span class="string">'is_returning'</span> <span class="operator">=></span> <span class="variable">$is_returning</span>,
+        <span class="string">'is_reeducation'</span> <span class="operator">=></span> <span class="variable">$is_reeducation</span>,
+        <span class="string">'show_extra_fields'</span> <span class="operator">=></span> <span class="variable">$show_extra_fields</span> <span class="comment">// &lt;-- هذا هو المتغير الأهم</span>
+    ];
+
+    <span class="comment">// تحميل الواجهات</span>
+    <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/header'</span>, <span class="variable">$data</span>);
+    <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'preinscription/upload/upload_form_view'</span>, <span class="variable">$data</span>);
+    <span class="variable">$this</span>->load-><span class="function-name">view</span>(<span class="string">'menu/footer'</span>);
+}</code></pre>
         </div>
         
-        <div class="section" id="section-3">
+        <div class="section">
             <h2>3. المرحلة الثانية: تعديل الواجهة الأمامية (Views)</h2>
-            <p>هذه الواجهة أصبحت الآن ذكية وتعرض الحقول الصحيحة بناءً على حالة المتعلم.</p>
             
-            <h3 id="section-3-1">3.1 الملف: <span class="path">application/views/preinscription/upload/upload_form_view.php</span></h3>
+            <h3>3.1 الملف: <span class="path">application/views/preinscription/upload/upload_form_view.php</span></h3>
+            <p><strong>الإجراء:</strong> قم باستبدال الكود الكامل للواجهة بهذا الكود المحدث، الذي يعرض الحقول الصحيحة لكل حالة.</p>
             <pre><code><span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"container contenu_eleve"</span> <span class="html-attr">style=</span><span class="html-string">"margin-top:60px"</span><span class="html-tag">&gt;</span>
-     <span class="html-tag">&lt;ol</span> <span class="html-attr">class=</span><span class="html-string">"breadcrumb"</span><span class="html-tag">&gt;</span>
-        <span class="html-tag">&lt;li&gt;</span><span class="html-tag">&lt;i</span> <span class="html-attr">class=</span><span class="html-string">"glyphicon glyphicon-open-file"</span><span class="html-tag">&gt;</span><span class="html-tag">&lt;/i&gt;</span> إرفاق الوثائق<span class="html-tag">&lt;/li&gt;</span>
+    <span class="html-tag">&lt;ol</span> <span class="html-attr">class=</span><span class="html-string">"breadcrumb"</span><span class="html-tag">&gt;</span>
+        <span class="html-tag">&lt;li&gt;&lt;i</span> <span class="html-attr">class=</span><span class="html-string">"glyphicon glyphicon-open-file"</span><span class="html-tag">&gt;&lt;/i&gt;</span> إرفاق الوثائق<span class="html-tag">&lt;/li&gt;</span>
         <span class="html-tag">&lt;li</span> <span class="html-attr">class=</span><span class="html-string">"active"</span><span class="html-tag">&gt;</span>الخطوة 3: إرفاق الملفات<span class="html-tag">&lt;/li&gt;</span>
     <span class="html-tag">&lt;/ol&gt;</span>
     <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"col-md-8 col-md-offset-2"</span><span class="html-tag">&gt;</span>
         <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"panel panel-primary"</span><span class="html-tag">&gt;</span>
-             <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"panel-heading"</span><span class="html-tag">&gt;&lt;h3</span> <span class="html-attr">class=</span><span class="html-string">"panel-title"</span><span class="html-tag">&gt;</span>إرفاق ملف الوثائق الثبوتية (PDF)<span class="html-tag">&lt;/h3&gt;&lt;/div&gt;</span>
+            <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"panel-heading"</span><span class="html-tag">&gt;&lt;h3</span> <span class="html-attr">class=</span><span class="html-string">"panel-title"</span><span class="html-tag">&gt;</span>إرفاق ملف الوثائق الثبوتية (PDF)<span class="html-tag">&lt;/h3&gt;&lt;/div&gt;</span>
             <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"panel-body"</span><span class="html-tag">&gt;</span>
-                <span class="html-tag">&lt;h4&gt;</span>مرحبًا بك، <span class="php-tag">&lt;?php</span> <span class="keyword">echo</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_name'</span>)); <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/h4&gt;</span>
-                <span class="html-tag">&lt;p&gt;</span>رقم استمارتك هو: <span class="html-tag">&lt;strong&gt;</span><span class="php-tag">&lt;?php</span> <span class="keyword">echo</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$this</span><span class="operator">-&gt;</span><span class="variable">session</span><span class="operator">-&gt;</span><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>)); <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/strong&gt;&lt;/p&gt;</span>
+                <span class="html-tag">&lt;h4&gt;</span>مرحبًا بك، <span class="php-tag">&lt;?php</span> <span class="function-name">echo</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_name'</span>)); <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/h4&gt;</span>
+                <span class="html-tag">&lt;p&gt;</span>رقم استمارتك هو: <span class="html-tag">&lt;strong&gt;&lt;?php</span> <span class="function-name">echo</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'upload_student_enpr'</span>)); <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/strong&gt;&lt;/p&gt;</span>
                 <span class="html-tag">&lt;hr&gt;</span>
                 
-                <span class="php-tag">&lt;?php</span> <span class="keyword">if</span> (<span class="function-name">isset</span>(<span class="variable">$error</span>)): <span class="php-tag">?&gt;</span><span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-danger"</span><span class="html-tag">&gt;</span><span class="php-tag">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$error</span>; <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/div&gt;</span><span class="php-tag">&lt;?php</span> <span class="keyword">endif</span>; <span class="php-tag">?&gt;</span>
+                <span class="php-tag">&lt;?php</span> <span class="keyword">if</span> (<span class="function-name">isset</span>(<span class="variable">$error</span>)): <span class="php-tag">?&gt;</span><span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-danger"</span><span class="html-tag">&gt;&lt;?php</span> <span class="function-name">echo</span> <span class="variable">$error</span>; <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/div&gt;&lt;?php</span> <span class="keyword">endif</span>; <span class="php-tag">?&gt;</span>
                 
                 <span class="html-tag">&lt;div</span> <span class="html-attr">id=</span><span class="html-string">"upload-errors"</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-danger"</span> <span class="html-attr">style=</span><span class="html-string">"display: none;"</span><span class="html-tag">&gt;</span>
                     <span class="html-tag">&lt;strong&gt;</span>خطأ:<span class="html-tag">&lt;/strong&gt;</span>
                     <span class="html-tag">&lt;ul</span> <span class="html-attr">id=</span><span class="html-string">"error-list"</span> <span class="html-attr">style=</span><span class="html-string">"padding-right: 20px;"</span><span class="html-tag">&gt;&lt;/ul&gt;</span>
                 <span class="html-tag">&lt;/div&gt;</span>
 
-                <span class="php-tag">&lt;?php</span> <span class="keyword">echo</span> <span class="function-name">form_open_multipart</span>(<span class="string">'upload_documents/do_upload'</span>, [<span class="string">'id'</span> <span class="operator">=&gt;</span> <span class="string">'uploadForm'</span>]);<span class="php-tag">?&gt;</span>
+                <span class="php-tag">&lt;?php</span> <span class="function-name">echo</span> <span class="function-name">form_open_multipart</span>(<span class="string">'upload_documents/do_upload'</span>, [<span class="string">'id'</span> <span class="operator">=></span> <span class="string">'uploadForm'</span>]);<span class="php-tag">?&gt;</span>
 
                     <span class="php-tag">&lt;?php</span> <span class="keyword">if</span> (<span class="function-name">isset</span>(<span class="variable">$is_returning</span>) <span class="operator">&amp;&amp;</span> <span class="variable">$is_returning</span>): <span class="php-tag">?&gt;</span>
-                        <span class="html-tag">&lt;!--</span> <span class="comment">=======================</span> <span class="html-tag">--&gt;</span>
-                        <span class="html-tag">&lt;!--</span> <span class="comment">الحالة 1: متعلم قديم</span> <span class="html-tag">--&gt;</span>
-                        <span class="html-tag">&lt;!--</span> <span class="comment">=======================</span> <span class="html-tag">--&gt;</span>
+                        <span class="comment">&lt;!-- ======================= --&gt;</span>
+                        <span class="comment">&lt;!-- الحالة 1: متعلم قديم --&gt;</span>
+                        <span class="comment">&lt;!-- ======================= --&gt;</span>
                         <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-info"</span><span class="html-tag">&gt;&lt;strong&gt;</span>ملاحظة:<span class="html-tag">&lt;/strong&gt;</span> بما أنك متعلم قديم، يطلب منك فقط إرفاق <span class="html-tag">&lt;strong&gt;</span>وصل الدفع (إجباري)<span class="html-tag">&lt;/strong&gt;</span>.<span class="html-tag">&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_payment"</span><span class="html-tag">&gt;</span>1. وصل الدفع <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">name=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_payment"</span><span class="html-tag">&gt;</span>1. وصل الدفع <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">name=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
 
                     <span class="php-tag">&lt;?php</span> <span class="keyword">elseif</span> (<span class="function-name">isset</span>(<span class="variable">$is_reeducation</span>) <span class="operator">&amp;&amp;</span> <span class="variable">$is_reeducation</span>): <span class="php-tag">?&gt;</span>
-                        <span class="html-tag">&lt;!--</span> <span class="comment">=======================</span> <span class="html-tag">--&gt;</span>
-                        <span class="html-tag">&lt;!--</span> <span class="comment">الحالة 2: إعادة التربية (FRAIS=1500)</span> <span class="html-tag">--&gt;</span>
-                        <span class="html-tag">&lt;!--</span> <span class="comment">=======================</span> <span class="html-tag">--&gt;</span>
+                        <span class="comment">&lt;!-- ======================= --&gt;</span>
+                        <span class="comment">&lt;!-- الحالة 2: إعادة التربية (FRAISINS=1500) --&gt;</span>
+                        <span class="comment">&lt;!-- ======================= --&gt;</span>
                         <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-warning"</span><span class="html-tag">&gt;&lt;strong&gt;</span>ملاحظة (إعادة التربية):<span class="html-tag">&lt;/strong&gt;</span> يطلب منك إرفاق <span class="html-tag">&lt;strong&gt;</span>شهادة الميلاد (إجبارية)<span class="html-tag">&lt;/strong&gt;</span>. باقي الوثائق اختيارية.<span class="html-tag">&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_payment"</span><span class="html-tag">&gt;</span>1. وصل الدفع (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">name=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_birth"</span><span class="html-tag">&gt;</span>2. شهادة الميلاد <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">name=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_photo"</span><span class="html-tag">&gt;</span>3. الصورة الشمسية (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">name=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_statement"</span><span class="html-tag">&gt;</span>4. التصريح الشرفي (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">name=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_school"</span><span class="html-tag">&gt;</span>5. شهادة مدرسية أو شهادة التحرر من محو الأمية (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_school"</span> <span class="html-attr">name=</span><span class="html-string">"doc_school"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_grades"</span><span class="html-tag">&gt;</span>6. كشف النقاط (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_grades"</span> <span class="html-attr">name=</span><span class="html-string">"doc_grades"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_payment"</span><span class="html-tag">&gt;</span>1. وصل الدفع (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">name=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_birth"</span><span class="html-tag">&gt;</span>2. شهادة الميلاد <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">name=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_photo"</span><span class="html-tag">&gt;</span>3. الصورة الشمسية (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">name=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_statement"</span><span class="html-tag">&gt;</span>4. التصريح الشرفي (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">name=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_school"</span><span class="html-tag">&gt;</span>5. شهادة مدرسية أو شهادة التحرر من محو الأمية (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_school"</span> <span class="html-attr">name=</span><span class="html-string">"doc_school"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_grades"</span><span class="html-tag">&gt;</span>6. كشف النقاط (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_grades"</span> <span class="html-attr">name=</span><span class="html-string">"doc_grades"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
                 
-                <span class="php-tag">&lt;?php</span> <span class="keyword">else</span>: <span class="php-tag">?&gt;</span>
-                    <span class="html-tag">&lt;!--</span> <span class="comment">=======================</span> <span class="html-tag">--&gt;</span>
-                    <span class="html-tag">&lt;!--</span> <span class="comment">الحالة 3: متعلم جديد (عادي أو ابن عامل)</span> <span class="html-tag">--&gt;</span>
-                    <span class="html-tag">&lt;!--</span> <span class="comment">=======================</span> <span class="html-tag">--&gt;</span>
-                    <span class="php-tag">&lt;?php</span> <span class="keyword">if</span> (<span class="function-name">isset</span>(<span class="variable">$requires_extra_docs</span>) <span class="operator">&amp;&amp;</span> <span class="variable">$requires_extra_docs</span>): <span class="php-tag">?&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-info"</span><span class="html-tag">&gt;&lt;strong&gt;</span>ملاحظة هامة:<span class="html-tag">&lt;/strong&gt;</span> يجب إرفاق جميع الوثائق <span class="html-tag">&lt;strong&gt;</span>الستة (6)<span class="html-tag">&lt;/strong&gt;</span> المطلوبة لإتمام العملية بنجاح.<span class="html-tag">&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_payment"</span><span class="html-tag">&gt;</span>1. وصل الدفع <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">name=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_birth"</span><span class="html-tag">&gt;</span>2. شهادة الميلاد <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">name=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_photo"</span><span class="html-tag">&gt;</span>3. الصورة الشمسية <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">name=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_statement"</span><span class="html-tag">&gt;</span>4. التصريح الشرفي <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">name=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_school"</span><span class="html-tag">&gt;</span>5. شهادة مدرسية أو شهادة التحرر من محو الأمية <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_school"</span> <span class="html-attr">name=</span><span class="html-string">"doc_school"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_grades"</span><span class="html-tag">&gt;</span>6. كشف النقاط <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_grades"</span> <span class="html-attr">name=</span><span class="html-string">"doc_grades"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
                     <span class="php-tag">&lt;?php</span> <span class="keyword">else</span>: <span class="php-tag">?&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-info"</span><span class="html-tag">&gt;&lt;strong&gt;</span>ملاحظة هامة:<span class="html-tag">&lt;/strong&gt;</span> يجب إرفاق جميع الوثائق <span class="html-tag">&lt;strong&gt;</span>الأربعة (4)<span class="html-tag">&lt;/strong&gt;</span> المطلوبة لإتمام العملية بنجاح.<span class="html-tag">&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_payment"</span><span class="html-tag">&gt;</span>1. وصل الدفع <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">name=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_birth"</span><span class="html-tag">&gt;</span>2. شهادة الميلاد <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">name=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_photo"</span><span class="html-tag">&gt;</span>3. الصورة الشمسية <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">name=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_statement"</span><span class="html-tag">&gt;</span>4. التصريح الشرفي <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">name=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> <span class="html-tag">/&gt;&lt;/div&gt;</span>
-                    <span class="php-tag">&lt;?php</span> <span class="keyword">endif</span>; <span class="php-tag">?&gt;</span>
-                <span class="php-tag">&lt;?php</span> <span class="keyword">endif</span>; <span class="php-tag">?&gt;</span>
+                        <span class="comment">&lt;!-- ======================= --&gt;</span>
+                        <span class="comment">&lt;!-- الحالة 3: متعلم جديد (عادي أو ابن عامل) --&gt;</span>
+                        <span class="comment">&lt;!-- ======================= --&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-info"</span><span class="html-tag">&gt;&lt;strong&gt;</span>ملاحظة هامة:<span class="html-tag">&lt;/strong&gt;</span> الوثائق الأربعة الأولى إجبارية.<span class="html-tag">&lt;/div&gt;</span>
 
-                    <span class="html-tag">&lt;br</span> <span class="html-tag">/&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_payment"</span><span class="html-tag">&gt;</span>1. وصل الدفع <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">name=</span><span class="html-string">"doc_payment"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_birth"</span><span class="html-tag">&gt;</span>2. شهادة الميلاد <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">name=</span><span class="html-string">"doc_birth"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_photo"</span><span class="html-tag">&gt;</span>3. الصورة الشمسية <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">name=</span><span class="html-string">"doc_photo"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_statement"</span><span class="html-tag">&gt;</span>4. التصريح الشرفي <span class="html-tag">&lt;span</span> <span class="html-attr">style=</span><span class="html-string">"color:red;"</span><span class="html-tag">&gt;</span>(إجباري)<span class="html-tag">&lt;/span&gt;&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">name=</span><span class="html-string">"doc_statement"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> <span class="html-attr">required</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+
+                        <span class="php-tag">&lt;?php</span> <span class="keyword">if</span> (<span class="function-name">isset</span>(<span class="variable">$show_extra_fields</span>) <span class="operator">&amp;&amp;</span> <span class="variable">$show_extra_fields</span>): <span class="php-tag">?&gt;</span>
+                            <span class="comment">&lt;!-- مولود قبل 1997: أظهر الحقول لكنها اختيارية --&gt;</span>
+                            <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-warning"</span><span class="html-tag">&gt;&lt;strong&gt;</span>تنبيه:<span class="html-tag">&lt;/strong&gt;</span> بما أن تاريخ ميلادك قبل 01-01-1997، يرجى إرفاق الوثائق التالية (إن وجدت).<span class="html-tag">&lt;/div&gt;</span>
+                            <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_school"</span><span class="html-tag">&gt;</span>5. شهادة مدرسية أو شهادة التحرر من محو الأمية (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_school"</span> <span class="html-attr">name=</span><span class="html-string">"doc_school"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                            <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"form-group"</span><span class="html-tag">&gt;&lt;label</span> <span class="html-attr">for=</span><span class="html-string">"doc_grades"</span><span class="html-tag">&gt;</span>6. كشف النقاط (اختياري)<span class="html-tag">&lt;/label&gt;&lt;input</span> <span class="html-attr">type=</span><span class="html-string">"file"</span> <span class="html-attr">id=</span><span class="html-string">"doc_grades"</span> <span class="html-attr">name=</span><span class="html-string">"doc_grades"</span> <span class="html-attr">class=</span><span class="html-string">"form-control"</span> <span class="html-attr">accept=</span><span class="html-string">"application/pdf"</span> /<span class="html-tag">&gt;&lt;/div&gt;</span>
+                        <span class="php-tag">&lt;?php</span> <span class="keyword">endif</span>; <span class="php-tag">?&gt;</span>
+                    <span class="php-tag">&lt;?php</span> <span class="keyword">endif</span>; <span class="php-tag">?&gt;</span>
+
+                    <span class="html-tag">&lt;br</span> /<span class="html-tag">&gt;</span>
                     <span class="html-tag">&lt;button</span> <span class="html-attr">type=</span><span class="html-string">"submit"</span> <span class="html-attr">class=</span><span class="html-string">"btn btn-success btn-lg"</span><span class="html-tag">&gt;</span>إرفاق الملفات المحددة<span class="html-tag">&lt;/button&gt;</span>
-                <span class="php-tag">&lt;?php</span> <span class="keyword">echo</span> <span class="function-name">form_close</span>(); <span class="php-tag">?&gt;</span>
+                <span class="php-tag">&lt;?php</span> <span class="function-name">echo</span> <span class="function-name">form_close</span>(); <span class="php-tag">?&gt;</span>
             <span class="html-tag">&lt;/div&gt;</span>
         <span class="html-tag">&lt;/div&gt;</span>
     <span class="html-tag">&lt;/div&gt;</span>
 <span class="html-tag">&lt;/div&gt;</span>
 
 <span class="html-tag">&lt;script&gt;</span>
-<span class="comment">    $(document).ready(function() {</span>
-<span class="comment">        $('#uploadForm').on('submit', function(event) {</span>
-<span class="comment">            var errorList = $('#error-list');</span>
-<span class="comment">            var errorContainer = $('#upload-errors');</span>
-<span class="comment">            var isValid = true;</span>
-<span class="comment">            errorList.html(''); </span>
-<span class="comment">            </span>
-<span class="comment">            $(this).find('input[type=file][required]').each(function() {</span>
-<span class="comment">                if ($(this).get(0).files.length === 0) {</span>
-<span class="comment">                    isValid = false;</span>
-<span class="comment">                    var label = $("label[for='" + $(this).attr('id') + "']").text();</span>
-<span class="comment">                    errorList.append('&lt;li&gt;الرجاء إرفاق ملف: ' + label + '&lt;/li&gt;');</span>
-<span class="comment">                }</span>
-<span class="comment">            });</span>
+    $(<span class="variable">document</span>).<span class="function-name">ready</span>(<span class="keyword">function</span>() {
+        <span class="variable">$</span>(<span class="string">'#uploadForm'</span>).<span class="function-name">on</span>(<span class="string">'submit'</span>, <span class="keyword">function</span>(<span class="variable">event</span>) {
+            <span class="keyword">var</span> <span class="variable">errorList</span> <span class="operator">=</span> <span class="variable">$</span>(<span class="string">'#error-list'</span>);
+            <span class="keyword">var</span> <span class="variable">errorContainer</span> <span class="operator">=</span> <span class="variable">$</span>(<span class="string">'#upload-errors'</span>);
+            <span class="keyword">var</span> <span class="variable">isValid</span> <span class="operator">=</span> <span class="keyword">true</span>;
+            <span class="variable">errorList</span>.<span class="function-name">html</span>(<span class="string">''</span>); 
+            
+            <span class="variable">$</span>(<span class="keyword">this</span>).<span class="function-name">find</span>(<span class="string">'input[type=file][required]'</span>).<span class="function-name">each</span>(<span class="keyword">function</span>() {
+                <span class="keyword">if</span> (<span class="variable">$</span>(<span class="keyword">this</span>).<span class="function-name">get</span>(0).<span class="variable">files</span>.<span class="variable">length</span> <span class="operator">===</span> 0) {
+                    <span class="variable">isValid</span> <span class="operator">=</span> <span class="keyword">false</span>;
+                    <span class="keyword">var</span> <span class="variable">label</span> <span class="operator">=</span> <span class="variable">$</span>(<span class="string">"label[for='"</span> <span class="operator">+</span> <span class="variable">$</span>(<span class="keyword">this</span>).<span class="function-name">attr</span>(<span class="string">'id'</span>) <span class="operator">+</span> <span class="string">"']"</span>).<span class="function-name">text</span>();
+                    <span class="variable">errorList</span>.<span class="function-name">append</span>(<span class="string">'&lt;li&gt;الرجاء إرفاق ملف: '</span> <span class="operator">+</span> <span class="variable">label</span> <span class="operator">+</span> <span class="string">'&lt;/li&gt;'</span>);
+                }
+            });
 
-<span class="comment">            if (!isValid) {</span>
-<span class="comment">                event.preventDefault(); </span>
-<span class="comment">                errorContainer.show(); </span>
-<span class="comment">            } else {</span>
-<span class="comment">                errorContainer.hide(); </span>
-<span class="comment">            }</span>
-<span class="comment">        });</span>
-<span class="comment">    });</span>
-<span class="comment"></span><span class="html-tag">&lt;/script&gt;</span></code></pre>
+            <span class="keyword">if</span> (<span class="operator">!</span><span class="variable">isValid</span>) {
+                <span class="variable">event</span>.<span class="function-name">preventDefault</span>(); 
+                <span class="variable">errorContainer</span>.<span class="function-name">show</span>(); 
+            } <span class="keyword">else</span> {
+                <span class="variable">errorContainer</span>.<span class="function-name">hide</span>(); 
+            }
+        });
+    });
+<span class="html-tag">&lt;/script&gt;</span>
+</code></pre>
 
-            <h3 id="section-3-2">3.2 الملف: <span class="path">application/views/preinscription/upload/upload_success_view.php</span></h3>
-            <p>
-                تم الإشارة إلى هذا الملف في التحديث، ووظيفته هي عرض وصل الإرفاق الذي يتضمن الآن بيانات المتعلم (رقم الاستمارة، الاسم، تاريخ الميلاد)، كما هو موضح في دالة <span class="highlight-blue">_show_success_page</span> بوحدة التحكم. يجب على هذا الملف عرض هذه المعلومات مع قائمة بالملفات التي تم إرفاقها.
-            </p>
+            <h3>3.2 الملف: <span class="path">application/views/preinscription/upload/upload_success_view.php</span></h3>
+            <p><strong>الإجراء:</strong> قم باستبدال الكود الكامل للواجهة بهذا الكود المحدث لإضافة بيانات المتعلم للوصل وإخفاء الروابط عند الطباعة.</p>
+            <pre><code><span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"container contenu_eleve"</span> <span class="html-attr">style=</span><span class="html-string">"margin-top:60px"</span><span class="html-tag">&gt;</span>
+    <span class="html-tag">&lt;ol</span> <span class="html-attr">class=</span><span class="html-string">"breadcrumb"</span><span class="html-tag">&gt;</span>
+        <span class="html-tag">&lt;li&gt;&lt;i</span> <span class="html-attr">class=</span><span class="html-string">"glyphicon glyphicon-open-file"</span><span class="html-tag">&gt;&lt;/i&gt;</span> إرفاق الوثائق<span class="html-tag">&lt;/li&gt;</span>
+        <span class="html-tag">&lt;li</span> <span class="html-attr">class=</span><span class="html-string">"active"</span><span class="html-tag">&gt;</span>الخطوة 4: تأكيد الإرفاق<span class="html-tag">&lt;/li&gt;</span>
+    <span class="html-tag">&lt;/ol&gt;</span>
+    <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"col-md-8 col-md-offset-2"</span><span class="html-tag">&gt;</span>
+        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"panel panel-success"</span><span class="html-tag">&gt;</span>
+            <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"panel-heading"</span><span class="html-tag">&gt;&lt;h3</span> <span class="html-attr">class=</span><span class="html-string">"panel-title"</span><span class="html-tag">&gt;</span>تمت عملية الإرفاق بنجاح<span class="html-tag">&lt;/h3&gt;&lt;/div&gt;</span>
+            <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"panel-body"</span><span class="html-tag">&gt;</span>
+                <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"alert alert-success text-center"</span> <span class="html-attr">style=</span><span class="html-string">"font-size: 1.2em;"</span><span class="html-tag">&gt;</span>
+                    <span class="html-tag">&lt;span</span> <span class="html-attr">class=</span><span class="html-string">"glyphicon glyphicon-ok-circle"</span> <span class="html-attr">style=</span><span class="html-string">"font-size: 2em; margin-bottom: 15px;"</span><span class="html-tag">&gt;&lt;/span&gt;</span>
+                    لقد تم إرفاق وثائقك بنجاح.
+                <span class="html-tag">&lt;/div&gt;</span>
+                
+                <span class="html-tag">&lt;div</span> <span class="html-attr">id=</span><span class="html-string">"receipt-to-print"</span><span class="html-tag">&gt;</span>
+                    <span class="html-tag">&lt;h4</span> <span class="html-attr">class=</span><span class="html-string">"text-center"</span><span class="html-tag">&gt;</span>وصل إرفاق الوثائق<span class="html-tag">&lt;/h4&gt;</span>
+                    <span class="html-tag">&lt;hr&gt;</span>
+                    
+                    <span class="comment">&lt;!-- ================================== --&gt;</span>
+                    <span class="comment">&lt;!-- التعديل: إضافة بيانات المتعلم --&gt;</span>
+                    <span class="comment">&lt;!-- ================================== --&gt;</span>
+                    <span class="php-tag">&lt;?php</span> <span class="keyword">if</span>(<span class="function-name">isset</span>(<span class="variable">$student_info</span>)): <span class="php-tag">?&gt;</span>
+                        <span class="html-tag">&lt;div</span> <span class="html-attr">class=</span><span class="html-string">"well well-sm"</span><span class="html-tag">&gt;</span>
+                            <span class="html-tag">&lt;p&gt;&lt;strong&gt;</span>رقم الاستمارة:<span class="html-tag">&lt;/strong&gt;</span> <span class="php-tag">&lt;?php</span> <span class="function-name">echo</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$student_info</span>[<span class="string">'enpr'</span>]); <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/p&gt;</span>
+                            <span class="html-tag">&lt;p&gt;&lt;strong&gt;</span>الاسم واللقب:<span class="html-tag">&lt;/strong&gt;</span> <span class="php-tag">&lt;?php</span> <span class="function-name">echo</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$student_info</span>[<span class="string">'name'</span>]); <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/p&gt;</span>
+                            <span class="html-tag">&lt;p&gt;&lt;strong&gt;</span>تاريخ الميلاد:<span class="html-tag">&lt;/strong&gt;</span> <span class="php-tag">&lt;?php</span> <span class="function-name">echo</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$student_info</span>[<span class="string">'dns'</span>]); <span class="php-tag">?&gt;</span><span class="html-tag">&lt;/p&gt;</span>
+                        <span class="html-tag">&lt;/div&gt;</span>
+                    <span class="php-tag">&lt;?php</span> <span class="keyword">endif</span>; <span class="php-tag">?&gt;</span>
+                    <span class="comment">&lt;!-- ================================== --&gt;</span>
+
+                    <span class="html-tag">&lt;h4&gt;</span>الوثائق التي تم إرفاقها:<span class="html-tag">&lt;/h4&gt;</span>
+                    <span class="html-tag">&lt;ul</span> <span class="html-attr">class=</span><span class="html-string">"list-group"</span><span class="html-tag">&gt;</span>
+                        <span class="php-tag">&lt;?php</span> <span class="keyword">if</span> (<span class="function-name">isset</span>(<span class="variable">$uploaded_files_display</span>) <span class="operator">&amp;&amp;</span> <span class="operator">!</span><span class="function-name">empty</span>(<span class="variable">$uploaded_files_display</span>)): <span class="php-tag">?&gt;</span>
+                            <span class="php-tag">&lt;?php</span> <span class="keyword">foreach</span> (<span class="variable">$uploaded_files_display</span> <span class="keyword">as</span> <span class="variable">$label</span> <span class="operator">=></span> <span class="variable">$url</span>): <span class="php-tag">?&gt;</span>
+                                <span class="html-tag">&lt;li</span> <span class="html-attr">class=</span><span class="html-string">"list-group-item"</span><span class="html-tag">&gt;</span>
+                                    <span class="html-tag">&lt;span</span> <span class="html-attr">class=</span><span class="html-string">"glyphicon glyphicon-file"</span><span class="html-tag">&gt;&lt;/span&gt;</span> <span class="php-tag">&lt;?php</span> <span class="function-name">echo</span> <span class="function-name">htmlspecialchars</span>(<span class="variable">$label</span>); <span class="php-tag">?&gt;</span>
+                                    <span class="html-tag">&lt;a</span> <span class="html-attr">href=</span><span class="html-string">"&lt;?php echo htmlspecialchars($url); ?&gt;"</span> <span class="html-attr">target=</span><span class="html-string">"_blank"</span> <span class="html-attr">class=</span><span class="html-string">"btn btn-info btn-xs pull-left"</span><span class="html-tag">&gt;</span>معاينة<span class="html-tag">&lt;/a&gt;</span>
+                                <span class="html-tag">&lt;/li&gt;</span>
+                            <span class="php-tag">&lt;?php</span> <span class="keyword">endforeach</span>; <span class="php-tag">?&gt;</span>
+                        <span class="php-tag">&lt;?php</span> <span class="keyword">else</span>: <span class="php-tag">?&gt;</span>
+                            <span class="html-tag">&lt;li</span> <span class="html-attr">class=</span><span class="html-string">"list-group-item"</span><span class="html-tag">&gt;</span>لم يتم إرفاق أي وثائق.<span class="html-tag">&lt;/li&gt;</span>
+                        <span class="php-tag">&lt;?php</span> <span class="keyword">endif</span>; <span class="php-tag">?&gt;</span>
+                    <span class="html-tag">&lt;/ul&gt;</span>
+                <span class="html-tag">&lt;/div&gt;</span>
+                
+                <span class="html-tag">&lt;hr&gt;</span>
+                <span class="html-tag">&lt;p</span> <span class="html-attr">class=</span><span class="html-string">"text-center"</span><span class="html-tag">&gt;</span>
+                    <span class="html-tag">&lt;button</span> <span class="html-attr">type=</span><span class="html-string">"button"</span> <span class="html-attr">onclick=</span><span class="html-string">"printReceipt()"</span> <span class="html-attr">class=</span><span class="html-string">"btn btn-primary btn-lg"</span><span class="html-tag">&gt;</span>
+                        <span class="html-tag">&lt;span</span> <span class="html-attr">class=</span><span class="html-string">"glyphicon glyphicon-print"</span><span class="html-tag">&gt;&lt;/span&gt;</span> طباعة هذا الوصل
+                    <span class="html-tag">&lt;/button&gt;</span>
+                <span class="html-tag">&lt;/p&gt;</span>
+            <span class="html-tag">&lt;/div&gt;</span>
+        <span class="html-tag">&lt;/div&gt;</span>
+    <span class="html-tag">&lt;/div&gt;</span>
+<span class="html-tag">&lt;/div&gt;</span>
+
+<span class="html-tag">&lt;script&gt;</span>
+<span class="keyword">function</span> <span class="function-name">printReceipt</span>() {
+    <span class="keyword">var</span> <span class="variable">printContents</span> <span class="operator">=</span> <span class="variable">document</span>.<span class="function-name">getElementById</span>(<span class="string">'receipt-to-print'</span>).<span class="variable">innerHTML</span>;
+    <span class="keyword">var</span> <span class="variable">originalContents</span> <span class="operator">=</span> <span class="variable">document</span>.<span class="variable">body</span>.<span class="variable">innerHTML</span>;
+
+    <span class="comment">// إصلاح الرابط وتجهيز ستايل الطباعة</span>
+    <span class="keyword">var</span> <span class="variable">bootstrapLink</span> <span class="operator">=</span> <span class="string">'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'</span>;
+    
+    <span class="comment">// ستايل خاص بالطباعة</span>
+    <span class="keyword">var</span> <span class="variable">printStyles</span> <span class="operator">=</span> <span class="string">`
+        &lt;style&gt;
+            body { 
+                direction: rtl; 
+            }
+            /* === التعديل: إخفاء أزرار "معاينة" عند الطباعة === */
+            .btn, .btn-info, .pull-left {
+                display: none !important;
+            }
+            /* تنسيقات إضافية لضمان شكل جيد عند الطباعة */
+            .well {
+                border: 1px solid #eee;
+                background-color: #f9f9f9 !important; /* AWP changes color */
+                padding: 15px;
+            }
+            .list-group-item {
+                border: none;
+                padding-bottom: 5px;
+            }
+            h4 {
+                font-weight: 700;
+                margin-top: 15px;
+                margin-bottom: 10px;
+            }
+        &lt;/style&gt;
+    `</span>;
+
+    <span class="comment">// بناء الصفحة الجديدة للطباعة</span>
+    <span class="variable">document</span>.<span class="variable">body</span>.<span class="variable">innerHTML</span> <span class="operator">=</span> <span class="string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;طباعة وصل&lt;/title&gt;'</span> <span class="operator">+</span>
+                              <span class="string">'&lt;link rel="stylesheet" href="'</span> <span class="operator">+</span> <span class="variable">bootstrapLink</span> <span class="operator">+</span> <span class="string">'">'</span> <span class="operator">+</span>
+                              <span class="variable">printStyles</span> <span class="operator">+</span>
+                              <span class="string">'&lt;/head&gt;&lt;body&gt;'</span> <span class="operator">+</span> <span class="variable">printContents</span> <span class="operator">+</span> <span class="string">'&lt;/body&gt;&lt;/html&gt;'</span>;
+    
+    <span class="comment">// تنفيذ الطباعة</span>
+    <span class_alias="variable">window</span>.<span class="function-name">print</span>();
+    
+    <span class="comment">// استعادة المحتوى الأصلي</span>
+    <span class="variable">document</span>.<span class="variable">body</span>.<span class="variable">innerHTML</span> <span class="operator">=</span> <span class="variable">originalContents</span>;
+    <span class="function-name">location</span>.<span class="function-name">reload</span>();
+}
+<span class="html-tag">&lt;/script&gt;</span>
+</code></pre>
         </div>
 
     </div>
