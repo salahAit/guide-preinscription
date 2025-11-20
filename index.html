@@ -83,7 +83,7 @@
         </div>
 
         <div class="alert alert-info">
-            ملاحظة: تحميل الملفات المعدلة <a href="updated-19-11-2025.zip" download="updated-19-11-2025.zip">updated-19-11-2025.zip</a>
+            ملاحظة: تحميل الملفات المعدلة <a href="updated-20-11-2025.zip" download="updated-20-11-2025.zip">updated-20-11-2025.zip</a>
         </div>
 
         <div class="section">
@@ -92,13 +92,13 @@
                 بناءً على الحالة الحالية للنظام، يهدف هذا التحديث الشامل إلى دمج جميع المتطلبات التالية في حزمة واحدة:
             </p>
             <ul>
-                <li><strong>تفعيل خاصية "إعادة الإرفاق" (التصحيح):</strong> السماح للمتعلمين الذين تم "تأجيل" ملفاتهم من طرف الإدارة بإعادة الدخول. يتم التعرف عليهم إذا كانت قيمة الحقل <code class="path">PH_ACT_AT_RLV_PY_FORM</code> في جدول <code class="path">INSELEVE11</code> تختلف عن <span class="highlight-blue">'00000000'</span> و <span class="highlight-blue">'00000001'</span>.</li>
+                <li><strong>تفعيل خاصية "إعادة الإرفاق" (التصحيح):</strong> السماح للمتعلمين الذين تم "تأجيل" ملفاتهم من طرف الإدارة بإعادة الدخول. يتم التعرف عليهم إذا كانت قيمة الحقل <code class="path">PH_ACT_AT_RLV_PY_FORM</code> في جدول <code class="path">INSELEVE11</code> تختلف عن <span class="highlight-blue">'0000000'</span> و <span class="highlight-blue">'0000001'</span>.</li>
                 <li><strong>إجراءات الأمان:</strong>
                     <ul style="padding-right: 1.5rem; margin-top: 0.5rem;">
                         <li><strong>منع تكرار الملفات:</strong> إجبار النظام على استبدال الملفات القديمة بنفس الاسم عند إعادة الرفع (خاصية overwrite).</li>
                         <li><strong>تأمين الجلسة:</strong> منع استغلال الجلسة لإعادة الرفع بعد إتمام العملية بنجاح.</li>
                         <!-- التصحيح هنا -->
-                        <li><strong>إغلاق حالة التأجيل:</strong> إعادة تعيين حقل التأجيل <code class="path">PH_ACT_AT_RLV_PY_FORM</code> إلى <span class="highlight-blue">'00000000'</span>.</li>
+                        <li><strong>إغلاق حالة التأجيل:</strong> إعادة تعيين حقل التأجيل <code class="path">PH_ACT_AT_RLV_PY_FORM</code> إلى <span class="highlight-blue">'0000000'</span>.</li>
                     </ul>
                 </li>
             </ul>
@@ -168,7 +168,7 @@
                 <span class="variable">$status_code</span> <span class="operator">=</span> <span class="function-name">isset</span>(<span class="variable">$student</span>->PH_ACT_AT_RLV_PY_FORM) ? <span class="variable">$student</span>->PH_ACT_AT_RLV_PY_FORM : <span class="string">''</span>;
                 
                 <span class="comment">// الشرط الدقيق: السماح بالدخول فقط إذا كانت الحالة تختلف عن العادي (0) والمقبول (1)</span>
-                <span class="keyword">if</span> (<span class="variable">$status_code</span> <span class="operator">!=</span> <span class="string">'00000000'</span> <span class="operator">&amp;&amp;</span> <span class="variable">$status_code</span> <span class="operator">!=</span> <span class="string">'00000001'</span>) {
+                <span class="keyword">if</span> (<span class="variable">$status_code</span> <span class="operator">!==</span> <span class="string">'0000000'</span> <span class="operator">&amp;&amp;</span> <span class="variable">$status_code</span> <span class="operator">!==</span> <span class="string">'0000001'</span>) {
                     <span class="variable">$is_correction_mode</span> <span class="operator">=</span> <span class="keyword">true</span>;
                     <span class="variable">$this</span>->session-><span class="function-name">set_flashdata</span>(<span class="string">'upload_info'</span>, <span class="string">'تم فتح المجال لك لإعادة رفع الوثائق لتصحيح الخطأ.'</span>);
                 } <span class="keyword">else</span> {
@@ -352,8 +352,8 @@
         <span class="comment">// [أمان] إغلاق وضع التصحيح في قاعدة البيانات الأصلية (INSELEVE11)</span>
         <span class="keyword">if</span> (<span class="variable">$this</span>->session-><span class="function-name">userdata</span>(<span class="string">'is_correction_mode'</span>)) {
             <span class="variable">$db_conn</span>-><span class="function-name">where</span>(<span class="string">'ENPR'</span>, <span class="variable">$enpr</span>);
-            <span class="comment">// تحديث الحالة لـ 00000000 لمنع إعادة الدخول</span>
-            <span class="variable">$db_conn</span>-><span class="function-name">update</span>(<span class="string">'INSELEVE11'</span>, [<span class="string">'PH_ACT_AT_RLV_PY_FORM'</span> <span class="operator">=></span> <span class="string">'00000000'</span>]);
+            <span class="comment">// تحديث الحالة لـ 0000000 لمنع إعادة الدخول</span>
+            <span class="variable">$db_conn</span>-><span class="function-name">update</span>(<span class="string">'INSELEVE11'</span>, [<span class="string">'PH_ACT_AT_RLV_PY_FORM'</span> <span class="operator">=></span> <span class="string">'0000000'</span>]);
         }
 
         <span class="variable">$this</span>-><span class="function-name">_show_success_page</span>(<span class="variable">$uploaded_urls</span>);
